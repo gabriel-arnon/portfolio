@@ -2,6 +2,7 @@ import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AnimatePresence, motion } from 'motion/react'
 import { gsap } from 'gsap'
+import { siDocker, siFastapi, siGit, siMongodb, siN8n, siNodedotjs, siNextdotjs, siOpencode, siPostgresql, siPython, siReact, siSupabase, siTypescript } from 'simple-icons'
 import './styles.css'
 
 const content = {
@@ -83,24 +84,65 @@ const content = {
   }
 }
 
-const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'AI']
+const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'Codex', 'OpenCode']
 const publicAsset = (file) => `${import.meta.env.BASE_URL}${file}`
+const codexIcon = {
+  path: 'M8.086.457a6.105 6.105 0 0 1 3.046-.415c1.333.153 2.521.72 3.564 1.7a.117.117 0 0 0 .107.029c1.408-.346 2.762-.224 4.061.366l.063.03.154.076c1.357.703 2.33 1.77 2.918 3.198.278.679.418 1.388.421 2.126a5.655 5.655 0 0 1-.18 1.631.167.167 0 0 0 .04.155 5.982 5.982 0 0 1 1.578 2.891c.385 1.901-.01 3.615-1.183 5.14l-.182.22a6.063 6.063 0 0 1-2.934 1.851.162.162 0 0 0-.108.102c-.255.736-.511 1.364-.987 1.992-1.199 1.582-2.962 2.462-4.948 2.451-1.583-.008-2.986-.587-4.21-1.736a.145.145 0 0 0-.14-.032c-.518.167-1.04.191-1.604.185a5.924 5.924 0 0 1-2.595-.622 6.058 6.058 0 0 1-2.146-1.781c-.203-.269-.404-.522-.551-.821a7.74 7.74 0 0 1-.495-1.283 6.11 6.11 0 0 1-.017-3.064.166.166 0 0 0 .008-.074.115.115 0 0 0-.037-.064 5.958 5.958 0 0 1-1.38-2.202 5.196 5.196 0 0 1-.333-1.589 6.915 6.915 0 0 1 .188-2.132c.45-1.484 1.309-2.648 2.577-3.493.282-.188.55-.334.802-.438.286-.12.573-.22.861-.304a.129.129 0 0 0 .087-.087A6.016 6.016 0 0 1 5.635 2.31C6.315 1.464 7.132.846 8.086.457zm-.804 7.85a.848.848 0 0 0-1.473.842l1.694 2.965-1.688 2.848a.849.849 0 0 0 1.46.864l1.94-3.272a.849.849 0 0 0 .007-.854l-1.94-3.393zm5.446 6.24a.849.849 0 0 0 0 1.695h4.848a.849.849 0 0 0 0-1.696h-4.848z',
+  hex: 'F1ECEC',
+  fillRule: 'evenodd'
+}
+const toolIcons = {
+  Python: siPython,
+  FastAPI: siFastapi,
+  React: siReact,
+  'Next.js': siNextdotjs,
+  TypeScript: siTypescript,
+  'Node.js': siNodedotjs,
+  PostgreSQL: siPostgresql,
+  MongoDB: siMongodb,
+  Supabase: siSupabase,
+  Docker: siDocker,
+  Git: siGit,
+  n8n: siN8n,
+  Codex: codexIcon,
+  OpenCode: siOpencode
+}
 const printopsShots = [
   {
-    src: 'https://github.com/user-attachments/assets/5baa8d6b-d3fb-4839-953f-f6ec59238f98',
+    src: publicAsset('printops-dashboard.png'),
     alt: 'Dashboard do PrintOps com métricas da frota de impressoras'
   },
   {
-    src: 'https://github.com/user-attachments/assets/1d5caf3a-b028-47f5-98f3-f22a5f01d2b2',
+    src: publicAsset('printops-table.png'),
     alt: 'Tabela de impressoras monitoradas no PrintOps'
   },
   {
-    src: 'https://github.com/user-attachments/assets/72e738d8-f515-4742-a000-6360f5c4a940',
-    alt: 'Detalhes de uma impressora no PrintOps'
+    src: publicAsset('printops-discovery.png'),
+    alt: 'Tela de descoberta de impressoras com varredura SNMP em andamento'
   },
   {
-    src: 'https://github.com/user-attachments/assets/49944e46-d62a-445f-bdbb-7f7cd4be0355',
-    alt: 'Tela de descoberta de impressoras do PrintOps'
+    src: publicAsset('printops-add-printer.png'),
+    alt: 'Formulário de cadastro de uma nova impressora no PrintOps'
+  }
+]
+const nexahelpShots = [
+  {
+    src: publicAsset('nexahelp.png'),
+    alt: 'Landing page do NexaHelp AI'
+  },
+  {
+    src: publicAsset('nexahelp2.png'),
+    alt: 'Assistente corporativo do NexaHelp AI'
+  }
+]
+const financyShots = [
+  {
+    src: publicAsset('financy.png'),
+    alt: 'Dashboard do Financy com visão geral das finanças'
+  },
+  {
+    src: publicAsset('financy2.png'),
+    alt: 'Assistente financeiro do Financy'
   }
 ]
 
@@ -124,11 +166,21 @@ function SocialIcon({ name }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.8h8.2L19 7.6v13.6H6z" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="M14 2.8v5h5M9 12h7M9 15.5h7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
 }
 
+function ToolIcon({ name }) {
+  const icon = toolIcons[name]
+  if (!icon) return null
+
+  const color = icon.hex === '000000' ? 'var(--paper)' : `#${icon.hex}`
+  return <svg className="tool-icon" viewBox="0 0 24 24" aria-hidden="true" style={{ color }}><path d={icon.path} fill="currentColor" fillRule={icon.fillRule} /></svg>
+}
+
 function App() {
   const [language, setLanguage] = useState('pt')
   const [menuOpen, setMenuOpen] = useState(false)
   const [imageFailed, setImageFailed] = useState(false)
   const [printopsShotIndex, setPrintopsShotIndex] = useState(0)
+  const [nexahelpShotIndex, setNexahelpShotIndex] = useState(0)
+  const [financyShotIndex, setFinancyShotIndex] = useState(0)
   const heroRef = useRef(null)
   const t = content[language]
 
@@ -203,17 +255,17 @@ function App() {
               <a className="button button-primary" href="#projetos">{t.cta}<Arrow /></a>
               <a className="text-link" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a>
             </div>
-            <div className="hero-socials" aria-label="Links rápidos">
-              <a className="hero-social" href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="GitHub de Gabriel Arnon"><span className="social-icon"><SocialIcon name="github" /></span><span>GitHub</span><Arrow diagonal /></a>
-              <a className="hero-social" href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="LinkedIn de Gabriel Arnon"><span className="social-icon"><SocialIcon name="linkedin" /></span><span>LinkedIn</span><Arrow diagonal /></a>
-              <a className="hero-social" href="mailto:gabriel.drtroll@gmail.com" aria-label="Enviar email para Gabriel Arnon"><span className="social-icon"><SocialIcon name="mail" /></span><span>Email</span><Arrow diagonal /></a>
-              <a className="hero-social" href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer" aria-label="Abrir currículo de Gabriel Arnon"><span className="social-icon"><SocialIcon name="resume" /></span><span>CV</span><Arrow diagonal /></a>
-            </div>
           </div>
           <div className="hero-visual">
             <div className="visual-label label-top">01 / 05</div>
             <div className="hero-orbit" aria-hidden="true"><span>FULL STACK · AUTOMATION · AI · </span></div>
             <div className="photo-frame">
+              <div className="hero-socials" aria-label="Links rápidos">
+                <a className="hero-social" href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="GitHub de Gabriel Arnon"><span className="social-icon"><SocialIcon name="github" /></span><span>GitHub</span><Arrow diagonal /></a>
+                <a className="hero-social" href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="LinkedIn de Gabriel Arnon"><span className="social-icon"><SocialIcon name="linkedin" /></span><span>LinkedIn</span><Arrow diagonal /></a>
+                <a className="hero-social" href="mailto:gabriel.drtroll@gmail.com" aria-label="Enviar email para Gabriel Arnon"><span className="social-icon"><SocialIcon name="mail" /></span><span>Email</span><Arrow diagonal /></a>
+                <a className="hero-social" href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer" aria-label="Abrir currículo de Gabriel Arnon"><span className="social-icon"><SocialIcon name="resume" /></span><span>CV</span><Arrow diagonal /></a>
+              </div>
               {!imageFailed && <img className="hero-photo" src={publicAsset('profile.jpeg')} alt="Gabriel Arnon" onError={() => setImageFailed(true)} />}
               {imageFailed && <div className="photo-fallback"><strong>GA</strong><span>adicione<br />profile.jpeg</span></div>}
               <div className="photo-caption"><span>Gabriel Arnon</span><span>Bertioga, SP</span></div>
@@ -239,6 +291,7 @@ function App() {
             <div className="project-list">
               <motion.article className="project-card project-dark" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art printops-art screenshot-art">
+                  <img className="project-screenshot-backdrop" src={printopsShots[printopsShotIndex].src} alt="" aria-hidden="true" />
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.img className="project-screenshot" key={printopsShots[printopsShotIndex].src} src={printopsShots[printopsShotIndex].src} alt={printopsShots[printopsShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
                   </AnimatePresence>
@@ -253,15 +306,37 @@ function App() {
                 <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>PrintOps</h3></div><span className="project-arrow">↗</span><p>{t.printops}</p><div className="project-tech"><span>Python</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>SNMP</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/PrintOps" target="_blank" rel="noreferrer">{t.printopsRepo}<Arrow diagonal /></a></div>
               </motion.article>
               <motion.article className="project-card project-nexa" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art nexa-art"><div className="nexa-mark"><span>✦</span><strong>Nexa<span>Help</span></strong><small>AI / KNOWLEDGE SYSTEM</small></div><div className="nexa-chat"><i /><i /><i /></div><span className="art-index">02</span></div>
+                <div className="project-art nexa-art screenshot-art">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.img className="project-screenshot" key={nexahelpShots[nexahelpShotIndex].src} src={nexahelpShots[nexahelpShotIndex].src} alt={nexahelpShots[nexahelpShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                  </AnimatePresence>
+                  <div className="screenshot-shade" />
+                  <div className="shot-controls" aria-label="Navegar pelas imagens do NexaHelp">
+                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current - 1 + nexahelpShots.length) % nexahelpShots.length) }}>←</button>
+                    <span>{String(nexahelpShotIndex + 1).padStart(2, '0')} / {String(nexahelpShots.length).padStart(2, '0')}</span>
+                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current + 1) % nexahelpShots.length) }}>→</button>
+                  </div>
+                  <span className="art-index">02</span>
+                </div>
                 <div className="project-info"><div><span className="project-tag">{t.nexahelpTag}</span><h3>NexaHelp AI</h3></div><span className="project-arrow">↗</span><p>{t.nexahelp}</p><div className="project-tech"><span>React</span><span>TypeScript</span><span>TanStack</span><span>OpenAI</span><span>Vitest</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/nexahelp" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://nexahelp.vercel.app/" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-almeida" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src="https://raw.githubusercontent.com/gabriel-arnon/almeida-junior-advogado/main/public/images/og-image.png" alt="Landing page Almeida Junior Advogado" /><div className="screenshot-shade" /><span className="art-index">03</span></div>
+                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt="Landing page Almeida Junior Advogado" /><div className="screenshot-shade" /><span className="art-index">03</span></div>
                 <div className="project-info"><div><span className="project-tag">{t.landingPageTag}</span><h3>Almeida Junior Advogado</h3></div><span className="project-arrow">↗</span><p>{t.landingPage}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Playwright</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/almeida-junior-advogado" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://www.almeidajunioradvogado.com.br" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art financy-art"><div className="finance-card"><span>saldo total</span><strong>R$ 8.420,00</strong><div className="finance-line" /></div><div className="finance-pills"><i /><i /><i /></div><span className="art-index">04</span></div>
+                <div className="project-art financy-art screenshot-art">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.img className={financyShotIndex === 1 ? 'project-screenshot financy-portrait' : 'project-screenshot'} key={financyShots[financyShotIndex].src} src={financyShots[financyShotIndex].src} alt={financyShots[financyShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                  </AnimatePresence>
+                  <div className="screenshot-shade" />
+                  <div className="shot-controls" aria-label="Navegar pelas imagens do Financy">
+                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current - 1 + financyShots.length) % financyShots.length) }}>←</button>
+                    <span>{String(financyShotIndex + 1).padStart(2, '0')} / {String(financyShots.length).padStart(2, '0')}</span>
+                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current + 1) % financyShots.length) }}>→</button>
+                  </div>
+                  <span className="art-index">04</span>
+                </div>
                 <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>Financy</h3></div><span className="project-arrow">↗</span><p>{t.financy}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Supabase</span></div></div>
               </motion.article>
             </div>
@@ -270,7 +345,7 @@ function App() {
 
         <section className="stack section-wrap section-grid" id="stack">
           <div className="section-kicker"><span>{t.stackLabel}</span><span className="kicker-line" /></div>
-          <div className="stack-content"><h2>{t.stackTitle}</h2><p>{t.stackText}</p><div className="stack-cloud">{stack.map((item, index) => <motion.span key={item} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.035 }}>{item}</motion.span>)}</div></div>
+          <div className="stack-content"><h2>{t.stackTitle}</h2><p>{t.stackText}</p><div className="stack-cloud">{stack.map((item, index) => <motion.span key={item} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.035 }}><ToolIcon name={item} /><span>{item}</span></motion.span>)}</div></div>
         </section>
 
         <section className="experience section-wrap section-grid" id="experiencia">
