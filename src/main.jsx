@@ -72,6 +72,7 @@ const content = {
 }
 
 const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'AI']
+const publicAsset = (file) => `${import.meta.env.BASE_URL}${file}`
 
 function Arrow({ diagonal = false }) {
   return <span className={diagonal ? 'arrow arrow-diagonal' : 'arrow'}>↗</span>
@@ -160,7 +161,7 @@ function App() {
             <div className="visual-label label-top">01 / 05</div>
             <div className="hero-orbit" aria-hidden="true"><span>FULL STACK · AUTOMATION · AI · </span></div>
             <div className="photo-frame">
-              {!imageFailed && <img className="hero-photo" src="/profile.jpeg" alt="Gabriel Arnon" onError={() => setImageFailed(true)} />}
+              {!imageFailed && <img className="hero-photo" src={publicAsset('profile.jpeg')} alt="Gabriel Arnon" onError={() => setImageFailed(true)} />}
               {imageFailed && <div className="photo-fallback"><strong>GA</strong><span>adicione<br />profile.jpeg</span></div>}
               <div className="photo-caption"><span>Gabriel Arnon</span><span>Bertioga, SP</span></div>
             </div>
@@ -205,7 +206,7 @@ function App() {
           <div className="experience-content"><h2>{t.experienceTitle}</h2><div className="timeline"><div className="timeline-item"><div className="timeline-date">10.2024 — <span>{t.current}</span></div><div><h3>Técnico de TI</h3><p>INTS — Instituto Nacional de Tecnologia e Saúde</p><small>Hospital Municipal de Bertioga</small></div></div><div className="timeline-item"><div className="timeline-date">09.2023 — 08.2024</div><div><h3>Líder de atendimento ao cliente</h3><p>Linkfort Telecom</p><small>Bertioga, São Paulo</small></div></div><div className="timeline-item"><div className="timeline-date">08.2025 — 03.2027</div><div><h3>{t.degree}</h3><p>UniFECAF</p><small>Em andamento</small></div></div></div></div>
         </section>
 
-        <section className="contact section-wrap" id="contato"><div className="contact-inner"><div className="section-kicker"><span>{t.contactLabel}</span><span className="kicker-line" /></div><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className="button button-light" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a><div className="contact-links"><a href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer">LinkedIn <Arrow diagonal /></a><a href="/curriculo.pdf" target="_blank" rel="noreferrer">Currículo · {t.resume}<Arrow diagonal /></a></div></div></section>
+        <section className="contact section-wrap" id="contato"><div className="contact-inner"><div className="section-kicker"><span>{t.contactLabel}</span><span className="kicker-line" /></div><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className="button button-light" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a><div className="contact-links"><a href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer">LinkedIn <Arrow diagonal /></a><a href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer">Currículo · {t.resume}<Arrow diagonal /></a></div></div></section>
       </main>
 
       <footer className="site-footer section-wrap"><span>© 2026 Gabriel Arnon</span><span>{t.footer}</span><a href="#inicio">Voltar ao topo ↑</a></footer>
