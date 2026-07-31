@@ -21,7 +21,8 @@ const content = {
     projectsTitle: 'Construindo enquanto aprendo.',
     projectsText: 'Projetos autorais nascidos de problemas concretos e da vontade de entender cada camada de um produto digital.',
     inProgress: 'Em desenvolvimento',
-    printops: 'Monitoramento operacional de impressoras e equipamentos de impressão. Coleta via SNMP, descoberta de dispositivos, dashboard em tempo real, métricas históricas e eventos.',
+    printops: 'Plataforma de monitoramento para ambientes hospitalares: coleta via SNMP, descoberta automática, dashboard em tempo real, métricas históricas, toner, unidade de imagem e autenticação JWT.',
+    printopsRepo: 'Ver repositório',
     financy: 'Plataforma SaaS para organização financeira pessoal, com transações, contas, cartões, categorias, importações e automações.',
     stackLabel: '03 — Stack',
     stackTitle: 'Ferramentas que fazem parte do meu dia a dia.',
@@ -53,7 +54,8 @@ const content = {
     projectsTitle: 'Building while learning.',
     projectsText: 'Independent projects born from concrete problems and the desire to understand every layer of a digital product.',
     inProgress: 'In progress',
-    printops: 'Operational monitoring for printers and printing equipment. SNMP collection, device discovery, real-time dashboard, historical metrics and events.',
+    printops: 'A monitoring platform for hospital environments: SNMP collection, automatic discovery, real-time dashboard, historical metrics, toner, image unit and JWT authentication.',
+    printopsRepo: 'View repository',
     financy: 'A SaaS platform for personal finance, with transactions, accounts, cards, categories, imports and automations.',
     stackLabel: '03 — Stack',
     stackTitle: 'Tools that are part of my everyday work.',
@@ -73,6 +75,24 @@ const content = {
 
 const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'AI']
 const publicAsset = (file) => `${import.meta.env.BASE_URL}${file}`
+const printopsShots = [
+  {
+    src: 'https://github.com/user-attachments/assets/5baa8d6b-d3fb-4839-953f-f6ec59238f98',
+    alt: 'Dashboard do PrintOps com métricas da frota de impressoras'
+  },
+  {
+    src: 'https://github.com/user-attachments/assets/1d5caf3a-b028-47f5-98f3-f22a5f01d2b2',
+    alt: 'Tabela de impressoras monitoradas no PrintOps'
+  },
+  {
+    src: 'https://github.com/user-attachments/assets/72e738d8-f515-4742-a000-6360f5c4a940',
+    alt: 'Detalhes de uma impressora no PrintOps'
+  },
+  {
+    src: 'https://github.com/user-attachments/assets/49944e46-d62a-445f-bdbb-7f7cd4be0355',
+    alt: 'Tela de descoberta de impressoras do PrintOps'
+  }
+]
 
 function Arrow({ diagonal = false }) {
   return <span className={diagonal ? 'arrow arrow-diagonal' : 'arrow'}>↗</span>
@@ -82,6 +102,7 @@ function App() {
   const [language, setLanguage] = useState('pt')
   const [menuOpen, setMenuOpen] = useState(false)
   const [imageFailed, setImageFailed] = useState(false)
+  const [printopsShotIndex, setPrintopsShotIndex] = useState(0)
   const heroRef = useRef(null)
   const t = content[language]
 
@@ -185,8 +206,19 @@ function App() {
             <div className="section-heading"><h2>{t.projectsTitle}</h2><p>{t.projectsText}</p></div>
             <div className="project-list">
               <motion.article className="project-card project-dark" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art printops-art"><div className="art-window"><div className="window-top"><span /><span /><span /></div><div className="chart-bars"><i /><i /><i /><i /><i /><i /></div><div className="art-status"><b /> 24 dispositivos online</div></div><span className="art-index">01</span></div>
-                <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>PrintOps</h3></div><span className="project-arrow">↗</span><p>{t.printops}</p><div className="project-tech"><span>Python</span><span>FastAPI</span><span>SNMP</span><span>React</span></div></div>
+                <div className="project-art printops-art screenshot-art">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.img className="project-screenshot" key={printopsShots[printopsShotIndex].src} src={printopsShots[printopsShotIndex].src} alt={printopsShots[printopsShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                  </AnimatePresence>
+                  <div className="screenshot-shade" />
+                  <div className="shot-controls" aria-label="Navegar pelas imagens do PrintOps">
+                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current - 1 + printopsShots.length) % printopsShots.length) }}>←</button>
+                    <span>{String(printopsShotIndex + 1).padStart(2, '0')} / {String(printopsShots.length).padStart(2, '0')}</span>
+                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current + 1) % printopsShots.length) }}>→</button>
+                  </div>
+                  <span className="art-index">01</span>
+                </div>
+                <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>PrintOps</h3></div><span className="project-arrow">↗</span><p>{t.printops}</p><div className="project-tech"><span>Python</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>SNMP</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/PrintOps" target="_blank" rel="noreferrer">{t.printopsRepo}<Arrow diagonal /></a></div>
               </motion.article>
               <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art financy-art"><div className="finance-card"><span>saldo total</span><strong>R$ 8.420,00</strong><div className="finance-line" /></div><div className="finance-pills"><i /><i /><i /></div><span className="art-index">02</span></div>
