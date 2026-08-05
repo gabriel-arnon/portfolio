@@ -1,18 +1,16 @@
 # Repository Guidance
 
-## Structure
-- This is a single-package React 19/Vite 7 site. The application entrypoint and page content are in `src/main.jsx`; global styles are in `src/styles.css`.
-- Portuguese and English copy are maintained together in the `content` object in `src/main.jsx`.
-- Files in `public/` are served as static assets. Use the existing `publicAsset()` helper for them instead of root-absolute URLs.
+## Application
+- This is a single-package React 19/Vite 7 site; `src/main.jsx` contains the app entrypoint and page implementation, and `src/styles.css` contains global styles.
+- Keep Portuguese and English copy synchronized in the `content` object in `src/main.jsx`.
+- Use the `publicAsset()` helper in `src/main.jsx` for files under `public/`; GitHub Pages serves this app below `/portfolio/`, so do not hard-code root-absolute public asset paths.
 
 ## Commands
-- Install the locked dependencies with `npm ci`.
-- Run the local site with `npm run dev`.
-- Build the production bundle with `npm run build`; Vite writes it to `dist/`.
-- Preview a built bundle with `npm run preview`.
-- There are currently no lint, typecheck, or test scripts; the production build is the repository's automated validation step.
+- Install locked dependencies with `npm ci`.
+- Use `npm run dev` for local development, `npm run build` for the production bundle, and `npm run preview` to preview that bundle.
+- There are no lint, typecheck, or test scripts; `npm run build` is the repository's automated validation.
 
-## GitHub Pages
-- CI uses Node 24, runs `npm ci` and `npm run build`, and deploys `dist/` only for pushes to `main`; pull requests only run the build job.
-- In GitHub Actions, `vite.config.js` sets the base URL to `/portfolio/`; preserve this behavior and keep public asset paths base-aware.
-- Keep `package-lock.json` synchronized with `package.json`; do not commit generated `dist/` output.
+## Deployment
+- CI runs on Node 24, then runs `npm ci` and `npm run build`; deployment happens only for pushes to `main`, while pull requests only build.
+- Preserve the `vite.config.js` conditional base: `/portfolio/` in GitHub Actions and `/` locally.
+- Keep `package-lock.json` synchronized with `package.json`; `dist/` is generated and gitignored.

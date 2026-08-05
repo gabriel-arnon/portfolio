@@ -21,7 +21,11 @@ const content = {
     projectsLabel: '02 — Projetos em destaque',
     projectsTitle: 'Construindo enquanto aprendo.',
     projectsText: 'Projetos autorais nascidos de problemas concretos e da vontade de entender cada camada de um produto digital.',
+    dragProjects: 'Arraste para explorar',
     inProgress: 'Em desenvolvimento',
+    orbe: 'Central inteligente de monitoramento climático e operacional: consulta um CEP, cruza endereço, geolocalização e previsão meteorológica e classifica níveis de atenção.',
+    orbeTag: 'Projeto acadêmico',
+    orbeRepo: 'Ver repositório',
     printops: 'Plataforma de monitoramento para ambientes hospitalares: coleta via SNMP, descoberta automática, dashboard em tempo real, métricas históricas, toner, unidade de imagem e autenticação JWT.',
     printopsRepo: 'Ver repositório',
     financy: 'Plataforma SaaS para organização financeira pessoal, com transações, contas, cartões, categorias, importações e automações.',
@@ -59,7 +63,11 @@ const content = {
     projectsLabel: '02 — Featured projects',
     projectsTitle: 'Building while learning.',
     projectsText: 'Independent projects born from concrete problems and the desire to understand every layer of a digital product.',
+    dragProjects: 'Drag to explore',
     inProgress: 'In progress',
+    orbe: 'An intelligent climate and operational monitoring hub: it queries a ZIP code, combines address, geolocation and weather data, and classifies attention levels.',
+    orbeTag: 'Academic project',
+    orbeRepo: 'View repository',
     printops: 'A monitoring platform for hospital environments: SNMP collection, automatic discovery, real-time dashboard, historical metrics, toner, image unit and JWT authentication.',
     printopsRepo: 'View repository',
     financy: 'A SaaS platform for personal finance, with transactions, accounts, cards, categories, imports and automations.',
@@ -106,6 +114,10 @@ const toolIcons = {
   n8n: siN8n,
   Codex: codexIcon,
   OpenCode: siOpencode
+}
+const orbeShot = {
+  src: 'https://raw.githubusercontent.com/gabriel-arnon/ORBE/master/docs/evidencias/02-leitura.png',
+  alt: 'Painel do ORBE com leitura meteorológica e classificação de alerta'
 }
 const printopsShots = [
   {
@@ -182,6 +194,7 @@ function App() {
   const [nexahelpShotIndex, setNexahelpShotIndex] = useState(0)
   const [financyShotIndex, setFinancyShotIndex] = useState(0)
   const heroRef = useRef(null)
+  const projectDragRef = useRef({ active: false, axis: null, startX: 0, startY: 0, startScrollLeft: 0, moved: false })
   const t = content[language]
 
   useEffect(() => {
@@ -224,6 +237,53 @@ function App() {
   }, [])
 
   const closeMenu = () => setMenuOpen(false)
+
+  const startProjectDrag = (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return
+
+    const track = event.currentTarget
+    projectDragRef.current = { active: true, axis: null, startX: event.clientX, startY: event.clientY, startScrollLeft: track.scrollLeft, moved: false }
+    track.classList.add('is-dragging')
+    track.setPointerCapture(event.pointerId)
+  }
+
+  const moveProjectDrag = (event) => {
+    const drag = projectDragRef.current
+    if (!drag.active) return
+
+    const deltaX = event.clientX - drag.startX
+    const deltaY = event.clientY - drag.startY
+    if (!drag.axis && Math.max(Math.abs(deltaX), Math.abs(deltaY)) > 6) {
+      drag.axis = Math.abs(deltaX) > Math.abs(deltaY) ? 'x' : 'y'
+    }
+    if (drag.axis !== 'x') return
+
+    drag.moved = drag.moved || Math.abs(deltaX) > 4
+    event.preventDefault()
+    event.currentTarget.scrollLeft = drag.startScrollLeft - deltaX
+  }
+
+  const endProjectDrag = (event) => {
+    const track = event.currentTarget
+    if (!projectDragRef.current.active) return
+
+    projectDragRef.current.active = false
+    track.classList.remove('is-dragging')
+    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId)
+    if (projectDragRef.current.moved) {
+      window.setTimeout(() => {
+        if (!projectDragRef.current.active) projectDragRef.current.moved = false
+      }, 0)
+    }
+  }
+
+  const preventDraggedProjectClick = (event) => {
+    if (!projectDragRef.current.moved) return
+
+    event.preventDefault()
+    event.stopPropagation()
+    projectDragRef.current.moved = false
+  }
 
   return (
     <div className="app-shell" ref={heroRef}>
@@ -288,7 +348,16 @@ function App() {
           <div className="section-kicker"><span>{t.projectsLabel}</span><span className="kicker-line" /></div>
           <div className="projects-content">
             <div className="section-heading"><h2>{t.projectsTitle}</h2><p>{t.projectsText}</p></div>
-            <div className="project-list">
+            <div className="project-carousel-meta"><span>{t.dragProjects}</span><span aria-hidden="true">↔</span></div>
+            <div className="project-list" role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick}>
+              <motion.article className="project-card project-orbe" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
+                <div className="project-art orbe-art screenshot-art">
+                  <img className="project-screenshot" src={orbeShot.src} alt={orbeShot.alt} />
+                  <div className="screenshot-shade" />
+                  <span className="art-index">01</span>
+                </div>
+                <div className="project-info"><div><span className="project-tag">{t.orbeTag}</span><h3>ORBE</h3></div><span className="project-arrow">↗</span><p>{t.orbe}</p><div className="project-tech"><span>Node.js</span><span>JavaScript</span><span>BrasilAPI</span><span>Open-Meteo</span><span>Airtable</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/ORBE" target="_blank" rel="noreferrer">{t.orbeRepo}<Arrow diagonal /></a></div>
+              </motion.article>
               <motion.article className="project-card project-dark" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art printops-art screenshot-art">
                   <img className="project-screenshot-backdrop" src={printopsShots[printopsShotIndex].src} alt="" aria-hidden="true" />
@@ -301,7 +370,7 @@ function App() {
                     <span>{String(printopsShotIndex + 1).padStart(2, '0')} / {String(printopsShots.length).padStart(2, '0')}</span>
                     <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current + 1) % printopsShots.length) }}>→</button>
                   </div>
-                  <span className="art-index">01</span>
+                  <span className="art-index">02</span>
                 </div>
                 <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>PrintOps</h3></div><span className="project-arrow">↗</span><p>{t.printops}</p><div className="project-tech"><span>Python</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>SNMP</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/PrintOps" target="_blank" rel="noreferrer">{t.printopsRepo}<Arrow diagonal /></a></div>
               </motion.article>
@@ -316,12 +385,12 @@ function App() {
                     <span>{String(nexahelpShotIndex + 1).padStart(2, '0')} / {String(nexahelpShots.length).padStart(2, '0')}</span>
                     <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current + 1) % nexahelpShots.length) }}>→</button>
                   </div>
-                  <span className="art-index">02</span>
+                  <span className="art-index">03</span>
                 </div>
                 <div className="project-info"><div><span className="project-tag">{t.nexahelpTag}</span><h3>NexaHelp AI</h3></div><span className="project-arrow">↗</span><p>{t.nexahelp}</p><div className="project-tech"><span>React</span><span>TypeScript</span><span>TanStack</span><span>OpenAI</span><span>Vitest</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/nexahelp" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://nexahelp.vercel.app/" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-almeida" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt="Landing page Almeida Junior Advogado" /><div className="screenshot-shade" /><span className="art-index">03</span></div>
+                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt="Landing page Almeida Junior Advogado" /><div className="screenshot-shade" /><span className="art-index">04</span></div>
                 <div className="project-info"><div><span className="project-tag">{t.landingPageTag}</span><h3>Almeida Junior Advogado</h3></div><span className="project-arrow">↗</span><p>{t.landingPage}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Playwright</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/almeida-junior-advogado" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://www.almeidajunioradvogado.com.br" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
@@ -335,7 +404,7 @@ function App() {
                     <span>{String(financyShotIndex + 1).padStart(2, '0')} / {String(financyShots.length).padStart(2, '0')}</span>
                     <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current + 1) % financyShots.length) }}>→</button>
                   </div>
-                  <span className="art-index">04</span>
+                  <span className="art-index">05</span>
                 </div>
                 <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>Financy</h3></div><span className="project-arrow">↗</span><p>{t.financy}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Supabase</span></div></div>
               </motion.article>
