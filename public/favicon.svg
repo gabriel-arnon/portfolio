@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GA">
+  <rect width="64" height="64" rx="14" fill="#111311" />
+  <text x="9" y="43" fill="#e8ebe3" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" letter-spacing="-3">GA</text>
+  <circle cx="51" cy="42" r="4" fill="#c8ff4d" />
+</svg>
