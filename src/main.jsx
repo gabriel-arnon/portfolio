@@ -7,7 +7,22 @@ import './styles.css'
 
 const content = {
   pt: {
+    pageTitle: 'Gabriel Arnon — Desenvolvedor Full Stack',
+    pageDescription: 'Portfólio de Gabriel Arnon, desenvolvedor full stack em formação.',
     nav: ['Início', 'Sobre', 'Projetos', 'Experiência', 'Contato'],
+    brandLabel: 'Gabriel Arnon, início',
+    mainNavigation: 'Navegação principal',
+    languageSelector: 'Escolher idioma',
+    openMenu: 'Abrir menu',
+    closeMenu: 'Fechar menu',
+    quickLinks: 'Links rápidos',
+    githubLabel: 'GitHub de Gabriel Arnon',
+    linkedinLabel: 'LinkedIn de Gabriel Arnon',
+    sendEmail: 'Enviar email para Gabriel Arnon',
+    openResume: 'Abrir currículo de Gabriel Arnon',
+    photoFallback: <>adicione<br />profile.jpeg</>,
+    previousImage: 'Imagem anterior',
+    nextImage: 'Próxima imagem',
     eyebrow: 'Técnico de TI · Desenvolvedor em formação',
     title: <>Transformo problemas reais<br /><em>em soluções digitais.</em></>,
     intro: 'Desenvolvedor full stack em formação, interessado em construir produtos úteis, automações inteligentes e sistemas que tornam operações mais simples.',
@@ -26,13 +41,26 @@ const content = {
     orbe: 'Central inteligente de monitoramento climático e operacional: consulta um CEP, cruza endereço, geolocalização e previsão meteorológica e classifica níveis de atenção.',
     orbeTag: 'Projeto acadêmico',
     orbeRepo: 'Ver repositório',
+    orbeAlt: 'Painel do ORBE com leitura meteorológica e classificação de alerta',
     printops: 'Plataforma de monitoramento para ambientes hospitalares: coleta via SNMP, descoberta automática, dashboard em tempo real, métricas históricas, toner, unidade de imagem e autenticação JWT.',
     printopsRepo: 'Ver repositório',
+    printopsImages: 'Navegar pelas imagens do PrintOps',
+    printopsDashboardAlt: 'Dashboard do PrintOps com métricas da frota de impressoras',
+    printopsTableAlt: 'Tabela de impressoras monitoradas no PrintOps',
+    printopsDiscoveryAlt: 'Tela de descoberta de impressoras com varredura SNMP em andamento',
+    printopsAddPrinterAlt: 'Formulário de cadastro de uma nova impressora no PrintOps',
     financy: 'Plataforma SaaS para organização financeira pessoal, com transações, contas, cartões, categorias, importações e automações.',
+    financyImages: 'Navegar pelas imagens do Financy',
+    financyDashboardAlt: 'Dashboard do Financy com visão geral das finanças',
+    financyAssistantAlt: 'Assistente financeiro do Financy',
     nexahelp: 'Copiloto corporativo com IA generativa para consultar procedimentos e políticas internas com fontes verificáveis.',
     nexahelpTag: 'Projeto acadêmico',
+    nexahelpImages: 'Navegar pelas imagens do NexaHelp',
+    nexahelpLandingAlt: 'Landing page do NexaHelp AI',
+    nexahelpAssistantAlt: 'Assistente corporativo do NexaHelp AI',
     landingPage: 'Landing page institucional para um escritório de advocacia, com foco em clareza, confiança e conversão de contatos.',
     landingPageTag: 'Landing page',
+    almeidaAlt: 'Landing page Almeida Junior Advogado',
     visitSite: 'Visitar site',
     stackLabel: '03 — Stack',
     stackTitle: 'Ferramentas que fazem parte do meu dia a dia.',
@@ -40,16 +68,43 @@ const content = {
     experienceLabel: '04 — Trajetória',
     experienceTitle: 'Experiência que conecta pessoas, sistemas e soluções.',
     current: 'Atual',
+    itRole: 'Técnico de TI',
+    intsCompany: 'INTS — Instituto Nacional de Tecnologia e Saúde',
+    hospital: 'Hospital Municipal de Bertioga',
+    customerRole: 'Líder de atendimento ao cliente',
+    linkfortCompany: 'Linkfort Telecom',
+    location: 'Bertioga, São Paulo',
     degree: 'Ensino Superior · Inteligência Artificial e Automação Digital',
+    degreeStatus: 'Em andamento',
+    factProjects: 'projetos autorais',
+    factYears: 'anos em tecnologia',
+    factLearning: 'vontade de aprender',
     contactLabel: '05 — Vamos conversar?',
     contactTitle: <>Tem um problema interessante?<br /><em>Vamos construir algo.</em></>,
     contactText: 'Estou aberto a oportunidades, projetos e conversas sobre tecnologia.',
     email: 'Enviar um email',
     resume: 'Baixar currículo',
+    resumeLink: 'Currículo',
+    backToTop: 'Voltar ao topo ↑',
     footer: 'Feito com curiosidade, código e café.'
   },
   en: {
+    pageTitle: 'Gabriel Arnon — Full Stack Developer',
+    pageDescription: 'Portfolio of Gabriel Arnon, full stack developer in progress.',
     nav: ['Home', 'About', 'Projects', 'Experience', 'Contact'],
+    brandLabel: 'Gabriel Arnon, home',
+    mainNavigation: 'Main navigation',
+    languageSelector: 'Choose language',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    quickLinks: 'Quick links',
+    githubLabel: 'Gabriel Arnon on GitHub',
+    linkedinLabel: 'Gabriel Arnon on LinkedIn',
+    sendEmail: 'Send an email to Gabriel Arnon',
+    openResume: 'Open Gabriel Arnon’s resume',
+    photoFallback: <>add<br />profile.jpeg</>,
+    previousImage: 'Previous image',
+    nextImage: 'Next image',
     eyebrow: 'IT Technician · Developer in progress',
     title: <>I turn real problems<br /><em>into digital solutions.</em></>,
     intro: 'Full stack developer in progress, interested in building useful products, intelligent automations and systems that make operations simpler.',
@@ -68,13 +123,26 @@ const content = {
     orbe: 'An intelligent climate and operational monitoring hub: it queries a ZIP code, combines address, geolocation and weather data, and classifies attention levels.',
     orbeTag: 'Academic project',
     orbeRepo: 'View repository',
+    orbeAlt: 'ORBE dashboard with weather readings and alert classification',
     printops: 'A monitoring platform for hospital environments: SNMP collection, automatic discovery, real-time dashboard, historical metrics, toner, image unit and JWT authentication.',
     printopsRepo: 'View repository',
+    printopsImages: 'Navigate PrintOps images',
+    printopsDashboardAlt: 'PrintOps dashboard with printer fleet metrics',
+    printopsTableAlt: 'Table of printers monitored by PrintOps',
+    printopsDiscoveryAlt: 'PrintOps printer discovery screen with an SNMP scan in progress',
+    printopsAddPrinterAlt: 'PrintOps form for registering a new printer',
     financy: 'A SaaS platform for personal finance, with transactions, accounts, cards, categories, imports and automations.',
+    financyImages: 'Navigate Financy images',
+    financyDashboardAlt: 'Financy dashboard with an overview of personal finances',
+    financyAssistantAlt: 'Financy financial assistant',
     nexahelp: 'An AI-powered corporate copilot for querying internal procedures and policies with verifiable sources.',
     nexahelpTag: 'Academic project',
+    nexahelpImages: 'Navigate NexaHelp images',
+    nexahelpLandingAlt: 'NexaHelp AI landing page',
+    nexahelpAssistantAlt: 'NexaHelp AI corporate assistant',
     landingPage: 'An institutional landing page for a law firm, focused on clarity, trust and contact conversion.',
     landingPageTag: 'Landing page',
+    almeidaAlt: 'Almeida Junior law firm landing page',
     visitSite: 'Visit site',
     stackLabel: '03 — Stack',
     stackTitle: 'Tools that are part of my everyday work.',
@@ -82,12 +150,24 @@ const content = {
     experienceLabel: '04 — Journey',
     experienceTitle: 'Experience connecting people, systems and solutions.',
     current: 'Current',
+    itRole: 'IT Technician',
+    intsCompany: 'INTS — Instituto Nacional de Tecnologia e Saúde',
+    hospital: 'Bertioga Municipal Hospital',
+    customerRole: 'Customer Service Leader',
+    linkfortCompany: 'Linkfort Telecom',
+    location: 'Bertioga, São Paulo',
     degree: 'Higher education · Artificial Intelligence and Digital Automation',
+    degreeStatus: 'In progress',
+    factProjects: 'independent projects',
+    factYears: 'years in technology',
+    factLearning: 'love of learning',
     contactLabel: '05 — Let’s talk?',
     contactTitle: <>Have an interesting problem?<br /><em>Let’s build something.</em></>,
     contactText: 'I am open to opportunities, projects and conversations about technology.',
     email: 'Send an email',
     resume: 'Download resume',
+    resumeLink: 'Resume',
+    backToTop: 'Back to top ↑',
     footer: 'Made with curiosity, code and coffee.'
   }
 }
@@ -116,45 +196,44 @@ const toolIcons = {
   OpenCode: siOpencode
 }
 const orbeShot = {
-  src: 'https://raw.githubusercontent.com/gabriel-arnon/ORBE/master/docs/evidencias/02-leitura.png',
-  alt: 'Painel do ORBE com leitura meteorológica e classificação de alerta'
+  src: 'https://raw.githubusercontent.com/gabriel-arnon/ORBE/master/docs/evidencias/02-leitura.png'
 }
 const printopsShots = [
   {
     src: publicAsset('printops-dashboard.png'),
-    alt: 'Dashboard do PrintOps com métricas da frota de impressoras'
+    altKey: 'printopsDashboardAlt'
   },
   {
     src: publicAsset('printops-table.png'),
-    alt: 'Tabela de impressoras monitoradas no PrintOps'
+    altKey: 'printopsTableAlt'
   },
   {
     src: publicAsset('printops-discovery.png'),
-    alt: 'Tela de descoberta de impressoras com varredura SNMP em andamento'
+    altKey: 'printopsDiscoveryAlt'
   },
   {
     src: publicAsset('printops-add-printer.png'),
-    alt: 'Formulário de cadastro de uma nova impressora no PrintOps'
+    altKey: 'printopsAddPrinterAlt'
   }
 ]
 const nexahelpShots = [
   {
     src: publicAsset('nexahelp.png'),
-    alt: 'Landing page do NexaHelp AI'
+    altKey: 'nexahelpLandingAlt'
   },
   {
     src: publicAsset('nexahelp2.png'),
-    alt: 'Assistente corporativo do NexaHelp AI'
+    altKey: 'nexahelpAssistantAlt'
   }
 ]
 const financyShots = [
   {
     src: publicAsset('financy.png'),
-    alt: 'Dashboard do Financy com visão geral das finanças'
+    altKey: 'financyDashboardAlt'
   },
   {
     src: publicAsset('financy2.png'),
-    alt: 'Assistente financeiro do Financy'
+    altKey: 'financyAssistantAlt'
   }
 ]
 
@@ -236,6 +315,12 @@ function App() {
     return () => ctx.revert()
   }, [])
 
+  useEffect(() => {
+    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
+    document.title = t.pageTitle
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.pageDescription)
+  }, [language, t])
+
   const closeMenu = () => setMenuOpen(false)
 
   const startProjectDrag = (event) => {
@@ -289,17 +374,17 @@ function App() {
     <div className="app-shell" ref={heroRef}>
       <div className="noise" aria-hidden="true" />
       <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="Gabriel Arnon, início">GA<span>.</span></a>
-        <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'} aria-label="Navegação principal">
+        <a className="brand" href="#inicio" aria-label={t.brandLabel}>GA<span>.</span></a>
+        <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'} aria-label={t.mainNavigation}>
           {t.nav.map((item, index) => <a href={`#${['inicio', 'sobre', 'projetos', 'experiencia', 'contato'][index]}`} key={item} onClick={closeMenu}>{item}</a>)}
         </nav>
         <div className="header-actions">
-          <div className="language-switcher" aria-label="Escolher idioma">
+          <div className="language-switcher" aria-label={t.languageSelector}>
             <button className={language === 'pt' ? 'active' : ''} onClick={() => setLanguage('pt')}>PT</button>
             <span>/</span>
             <button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')}>EN</button>
           </div>
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menu" aria-expanded={menuOpen}>
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? t.closeMenu : t.openMenu} aria-expanded={menuOpen}>
             <span /><span />
           </button>
         </div>
@@ -320,14 +405,14 @@ function App() {
             <div className="visual-label label-top">01 / 05</div>
             <div className="hero-orbit" aria-hidden="true"><span>FULL STACK · AUTOMATION · AI · </span></div>
             <div className="photo-frame">
-              <div className="hero-socials" aria-label="Links rápidos">
-                <a className="hero-social" href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="GitHub de Gabriel Arnon"><span className="social-icon"><SocialIcon name="github" /></span><span>GitHub</span><Arrow diagonal /></a>
-                <a className="hero-social" href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer" aria-label="LinkedIn de Gabriel Arnon"><span className="social-icon"><SocialIcon name="linkedin" /></span><span>LinkedIn</span><Arrow diagonal /></a>
-                <a className="hero-social" href="mailto:gabriel.drtroll@gmail.com" aria-label="Enviar email para Gabriel Arnon"><span className="social-icon"><SocialIcon name="mail" /></span><span>Email</span><Arrow diagonal /></a>
-                <a className="hero-social" href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer" aria-label="Abrir currículo de Gabriel Arnon"><span className="social-icon"><SocialIcon name="resume" /></span><span>CV</span><Arrow diagonal /></a>
+              <div className="hero-socials" aria-label={t.quickLinks}>
+                <a className="hero-social" href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer" aria-label={t.githubLabel}><span className="social-icon"><SocialIcon name="github" /></span><span>GitHub</span><Arrow diagonal /></a>
+                <a className="hero-social" href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer" aria-label={t.linkedinLabel}><span className="social-icon"><SocialIcon name="linkedin" /></span><span>LinkedIn</span><Arrow diagonal /></a>
+                <a className="hero-social" href="mailto:gabriel.drtroll@gmail.com" aria-label={t.sendEmail}><span className="social-icon"><SocialIcon name="mail" /></span><span>Email</span><Arrow diagonal /></a>
+                <a className="hero-social" href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer" aria-label={t.openResume}><span className="social-icon"><SocialIcon name="resume" /></span><span>CV</span><Arrow diagonal /></a>
               </div>
               {!imageFailed && <img className="hero-photo" src={publicAsset('profile.jpeg')} alt="Gabriel Arnon" onError={() => setImageFailed(true)} />}
-              {imageFailed && <div className="photo-fallback"><strong>GA</strong><span>adicione<br />profile.jpeg</span></div>}
+              {imageFailed && <div className="photo-fallback"><strong>GA</strong><span>{t.photoFallback}</span></div>}
               <div className="photo-caption"><span>Gabriel Arnon</span><span>Bertioga, SP</span></div>
             </div>
             <div className="visual-label label-bottom">{t.availability}</div>
@@ -340,7 +425,7 @@ function App() {
           <div className="about-content">
             <h2>{t.aboutTitle}</h2>
             <div className="about-columns"><p>{t.aboutText}</p><p>{t.aboutTextTwo}</p></div>
-            <div className="about-facts"><div><strong>02</strong><span>projetos autorais</span></div><div><strong>03+</strong><span>anos em tecnologia</span></div><div><strong>∞</strong><span>vontade de aprender</span></div></div>
+            <div className="about-facts"><div><strong>02</strong><span>{t.factProjects}</span></div><div><strong>03+</strong><span>{t.factYears}</span></div><div><strong>∞</strong><span>{t.factLearning}</span></div></div>
           </div>
         </section>
 
@@ -352,7 +437,7 @@ function App() {
             <div className="project-list" role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick}>
               <motion.article className="project-card project-orbe" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art orbe-art screenshot-art">
-                  <img className="project-screenshot" src={orbeShot.src} alt={orbeShot.alt} />
+                  <img className="project-screenshot" src={orbeShot.src} alt={t.orbeAlt} />
                   <div className="screenshot-shade" />
                   <span className="art-index">01</span>
                 </div>
@@ -362,13 +447,13 @@ function App() {
                 <div className="project-art printops-art screenshot-art">
                   <img className="project-screenshot-backdrop" src={printopsShots[printopsShotIndex].src} alt="" aria-hidden="true" />
                   <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className="project-screenshot" key={printopsShots[printopsShotIndex].src} src={printopsShots[printopsShotIndex].src} alt={printopsShots[printopsShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                    <motion.img className="project-screenshot" key={printopsShots[printopsShotIndex].src} src={printopsShots[printopsShotIndex].src} alt={t[printopsShots[printopsShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
                   </AnimatePresence>
                   <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label="Navegar pelas imagens do PrintOps">
-                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current - 1 + printopsShots.length) % printopsShots.length) }}>←</button>
+                  <div className="shot-controls" aria-label={t.printopsImages}>
+                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current - 1 + printopsShots.length) % printopsShots.length) }}>←</button>
                     <span>{String(printopsShotIndex + 1).padStart(2, '0')} / {String(printopsShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current + 1) % printopsShots.length) }}>→</button>
+                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current + 1) % printopsShots.length) }}>→</button>
                   </div>
                   <span className="art-index">02</span>
                 </div>
@@ -377,32 +462,32 @@ function App() {
               <motion.article className="project-card project-nexa" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art nexa-art screenshot-art">
                   <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className="project-screenshot" key={nexahelpShots[nexahelpShotIndex].src} src={nexahelpShots[nexahelpShotIndex].src} alt={nexahelpShots[nexahelpShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                    <motion.img className="project-screenshot" key={nexahelpShots[nexahelpShotIndex].src} src={nexahelpShots[nexahelpShotIndex].src} alt={t[nexahelpShots[nexahelpShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
                   </AnimatePresence>
                   <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label="Navegar pelas imagens do NexaHelp">
-                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current - 1 + nexahelpShots.length) % nexahelpShots.length) }}>←</button>
+                  <div className="shot-controls" aria-label={t.nexahelpImages}>
+                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current - 1 + nexahelpShots.length) % nexahelpShots.length) }}>←</button>
                     <span>{String(nexahelpShotIndex + 1).padStart(2, '0')} / {String(nexahelpShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current + 1) % nexahelpShots.length) }}>→</button>
+                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current + 1) % nexahelpShots.length) }}>→</button>
                   </div>
                   <span className="art-index">03</span>
                 </div>
                 <div className="project-info"><div><span className="project-tag">{t.nexahelpTag}</span><h3>NexaHelp AI</h3></div><span className="project-arrow">↗</span><p>{t.nexahelp}</p><div className="project-tech"><span>React</span><span>TypeScript</span><span>TanStack</span><span>OpenAI</span><span>Vitest</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/nexahelp" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://nexahelp.vercel.app/" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-almeida" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt="Landing page Almeida Junior Advogado" /><div className="screenshot-shade" /><span className="art-index">04</span></div>
+                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt={t.almeidaAlt} /><div className="screenshot-shade" /><span className="art-index">04</span></div>
                 <div className="project-info"><div><span className="project-tag">{t.landingPageTag}</span><h3>Almeida Junior Advogado</h3></div><span className="project-arrow">↗</span><p>{t.landingPage}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Playwright</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/almeida-junior-advogado" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://www.almeidajunioradvogado.com.br" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
               </motion.article>
               <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art financy-art screenshot-art">
                   <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className={financyShotIndex === 1 ? 'project-screenshot financy-portrait' : 'project-screenshot'} key={financyShots[financyShotIndex].src} src={financyShots[financyShotIndex].src} alt={financyShots[financyShotIndex].alt} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
+                    <motion.img className={financyShotIndex === 1 ? 'project-screenshot financy-portrait' : 'project-screenshot'} key={financyShots[financyShotIndex].src} src={financyShots[financyShotIndex].src} alt={t[financyShots[financyShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
                   </AnimatePresence>
                   <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label="Navegar pelas imagens do Financy">
-                    <button type="button" aria-label="Imagem anterior" onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current - 1 + financyShots.length) % financyShots.length) }}>←</button>
+                  <div className="shot-controls" aria-label={t.financyImages}>
+                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current - 1 + financyShots.length) % financyShots.length) }}>←</button>
                     <span>{String(financyShotIndex + 1).padStart(2, '0')} / {String(financyShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label="Próxima imagem" onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current + 1) % financyShots.length) }}>→</button>
+                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current + 1) % financyShots.length) }}>→</button>
                   </div>
                   <span className="art-index">05</span>
                 </div>
@@ -419,13 +504,13 @@ function App() {
 
         <section className="experience section-wrap section-grid" id="experiencia">
           <div className="section-kicker"><span>{t.experienceLabel}</span><span className="kicker-line" /></div>
-          <div className="experience-content"><h2>{t.experienceTitle}</h2><div className="timeline"><div className="timeline-item"><div className="timeline-date">10.2024 — <span>{t.current}</span></div><div><h3>Técnico de TI</h3><p>INTS — Instituto Nacional de Tecnologia e Saúde</p><small>Hospital Municipal de Bertioga</small></div></div><div className="timeline-item"><div className="timeline-date">09.2023 — 08.2024</div><div><h3>Líder de atendimento ao cliente</h3><p>Linkfort Telecom</p><small>Bertioga, São Paulo</small></div></div><div className="timeline-item"><div className="timeline-date">08.2025 — 03.2027</div><div><h3>{t.degree}</h3><p>UniFECAF</p><small>Em andamento</small></div></div></div></div>
+          <div className="experience-content"><h2>{t.experienceTitle}</h2><div className="timeline"><div className="timeline-item"><div className="timeline-date">10.2024 — <span>{t.current}</span></div><div><h3>{t.itRole}</h3><p>{t.intsCompany}</p><small>{t.hospital}</small></div></div><div className="timeline-item"><div className="timeline-date">09.2023 — 08.2024</div><div><h3>{t.customerRole}</h3><p>{t.linkfortCompany}</p><small>{t.location}</small></div></div><div className="timeline-item"><div className="timeline-date">08.2025 — 03.2027</div><div><h3>{t.degree}</h3><p>UniFECAF</p><small>{t.degreeStatus}</small></div></div></div></div>
         </section>
 
-        <section className="contact section-wrap" id="contato"><div className="contact-inner"><div className="section-kicker"><span>{t.contactLabel}</span><span className="kicker-line" /></div><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className="button button-light" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a><div className="contact-links"><a href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer">LinkedIn <Arrow diagonal /></a><a href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer">Currículo · {t.resume}<Arrow diagonal /></a></div></div></section>
+        <section className="contact section-wrap" id="contato"><div className="contact-inner"><div className="section-kicker"><span>{t.contactLabel}</span><span className="kicker-line" /></div><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className="button button-light" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a><div className="contact-links"><a href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer">LinkedIn <Arrow diagonal /></a><a href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer">{t.resumeLink} · {t.resume}<Arrow diagonal /></a></div></div></section>
       </main>
 
-      <footer className="site-footer section-wrap"><span>© 2026 Gabriel Arnon</span><span>{t.footer}</span><a href="#inicio">Voltar ao topo ↑</a></footer>
+      <footer className="site-footer section-wrap"><span>© 2026 Gabriel Arnon</span><span>{t.footer}</span><a href="#inicio">{t.backToTop}</a></footer>
       <AnimatePresence>{menuOpen && <motion.div className="menu-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeMenu} />}</AnimatePresence>
     </div>
   )
