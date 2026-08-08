@@ -50,9 +50,7 @@ const content = {
     printopsDiscoveryAlt: 'Tela de descoberta de impressoras com varredura SNMP em andamento',
     printopsAddPrinterAlt: 'Formulário de cadastro de uma nova impressora no PrintOps',
     financy: 'Plataforma SaaS para organização financeira pessoal, com transações, contas, cartões, categorias, importações e automações.',
-    financyImages: 'Navegar pelas imagens do Financy',
     financyDashboardAlt: 'Dashboard do Financy com visão geral das finanças',
-    financyAssistantAlt: 'Assistente financeiro do Financy',
     nexahelp: 'Copiloto corporativo com IA generativa para consultar procedimentos e políticas internas com fontes verificáveis.',
     nexahelpTag: 'Projeto acadêmico',
     nexahelpImages: 'Navegar pelas imagens do NexaHelp',
@@ -132,9 +130,7 @@ const content = {
     printopsDiscoveryAlt: 'PrintOps printer discovery screen with an SNMP scan in progress',
     printopsAddPrinterAlt: 'PrintOps form for registering a new printer',
     financy: 'A SaaS platform for personal finance, with transactions, accounts, cards, categories, imports and automations.',
-    financyImages: 'Navigate Financy images',
     financyDashboardAlt: 'Financy dashboard with an overview of personal finances',
-    financyAssistantAlt: 'Financy financial assistant',
     nexahelp: 'An AI-powered corporate copilot for querying internal procedures and policies with verifiable sources.',
     nexahelpTag: 'Academic project',
     nexahelpImages: 'Navigate NexaHelp images',
@@ -226,16 +222,11 @@ const nexahelpShots = [
     altKey: 'nexahelpAssistantAlt'
   }
 ]
-const financyShots = [
-  {
-    src: publicAsset('financy.png'),
-    altKey: 'financyDashboardAlt'
-  },
-  {
-    src: publicAsset('financy2.png'),
-    altKey: 'financyAssistantAlt'
-  }
-]
+const financyShot = {
+  src: publicAsset('financy.png'),
+  altKey: 'financyDashboardAlt'
+}
+const featuredProjectCount = 5
 
 function Arrow({ diagonal = false }) {
   return <span className={diagonal ? 'arrow arrow-diagonal' : 'arrow'}>↗</span>
@@ -271,7 +262,6 @@ function App() {
   const [imageFailed, setImageFailed] = useState(false)
   const [printopsShotIndex, setPrintopsShotIndex] = useState(0)
   const [nexahelpShotIndex, setNexahelpShotIndex] = useState(0)
-  const [financyShotIndex, setFinancyShotIndex] = useState(0)
   const heroRef = useRef(null)
   const projectDragRef = useRef({ active: false, axis: null, startX: 0, startY: 0, startScrollLeft: 0, moved: false })
   const t = content[language]
@@ -325,6 +315,7 @@ function App() {
 
   const startProjectDrag = (event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return
+    if (event.target.closest?.('button, a')) return
 
     const track = event.currentTarget
     projectDragRef.current = { active: true, axis: null, startX: event.clientX, startY: event.clientY, startScrollLeft: track.scrollLeft, moved: false }
@@ -425,7 +416,7 @@ function App() {
           <div className="about-content">
             <h2>{t.aboutTitle}</h2>
             <div className="about-columns"><p>{t.aboutText}</p><p>{t.aboutTextTwo}</p></div>
-            <div className="about-facts"><div><strong>02</strong><span>{t.factProjects}</span></div><div><strong>03+</strong><span>{t.factYears}</span></div><div><strong>∞</strong><span>{t.factLearning}</span></div></div>
+            <div className="about-facts"><div><strong>{String(featuredProjectCount).padStart(2, '0')}</strong><span>{t.factProjects}</span></div><div><strong>03+</strong><span>{t.factYears}</span></div><div><strong>∞</strong><span>{t.factLearning}</span></div></div>
           </div>
         </section>
 
@@ -480,15 +471,8 @@ function App() {
               </motion.article>
               <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
                 <div className="project-art financy-art screenshot-art">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className={financyShotIndex === 1 ? 'project-screenshot financy-portrait' : 'project-screenshot'} key={financyShots[financyShotIndex].src} src={financyShots[financyShotIndex].src} alt={t[financyShots[financyShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
-                  </AnimatePresence>
+                  <img className="project-screenshot" src={financyShot.src} alt={t[financyShot.altKey]} />
                   <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label={t.financyImages}>
-                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current - 1 + financyShots.length) % financyShots.length) }}>←</button>
-                    <span>{String(financyShotIndex + 1).padStart(2, '0')} / {String(financyShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setFinancyShotIndex((current) => (current + 1) % financyShots.length) }}>→</button>
-                  </div>
                   <span className="art-index">05</span>
                 </div>
                 <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>Financy</h3></div><span className="project-arrow">↗</span><p>{t.financy}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Supabase</span></div></div>

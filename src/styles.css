@@ -123,7 +123,6 @@ h2 { font-size: clamp(36px, 4.4vw, 62px); letter-spacing: -.065em; line-height: 
 .financy-art { background: #eef0ea; }
 .financy-art::before { display: none; }
 .financy-art .project-screenshot { object-fit: cover; object-position: center; background: #f6f7f2; }
-.financy-art .project-screenshot.financy-portrait { object-position: center; }
 .financy-art .screenshot-shade { background: linear-gradient(180deg, rgba(17,19,17,.02) 35%, rgba(17,19,17,.3) 100%); }
 .project-nexa { background: #1b202b; }
 .orbe-art { background: linear-gradient(135deg, #0e2532 0%, #112d35 100%); }
