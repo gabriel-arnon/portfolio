@@ -36,7 +36,7 @@ const content = {
     projectsLabel: '02 — Projetos em destaque',
     projectsTitle: 'Construindo enquanto aprendo.',
     projectsText: 'Projetos autorais nascidos de problemas concretos e da vontade de entender cada camada de um produto digital.',
-    dragProjects: 'Arraste para explorar',
+    dragProjects: 'Arraste ou use as setas para explorar',
     inProgress: 'Em desenvolvimento',
     orbe: 'Central inteligente de monitoramento climático e operacional: consulta um CEP, cruza endereço, geolocalização e previsão meteorológica e classifica níveis de atenção.',
     orbeTag: 'Projeto acadêmico',
@@ -116,7 +116,7 @@ const content = {
     projectsLabel: '02 — Featured projects',
     projectsTitle: 'Building while learning.',
     projectsText: 'Independent projects born from concrete problems and the desire to understand every layer of a digital product.',
-    dragProjects: 'Drag to explore',
+    dragProjects: 'Drag or use arrow keys to explore',
     inProgress: 'In progress',
     orbe: 'An intelligent climate and operational monitoring hub: it queries a ZIP code, combines address, geolocation and weather data, and classifies attention levels.',
     orbeTag: 'Academic project',
@@ -170,6 +170,9 @@ const content = {
 
 const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'Codex', 'OpenCode']
 const publicAsset = (file) => `${import.meta.env.BASE_URL}${file}`
+const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+const siteUrl = 'https://gabriel-arnon.github.io/portfolio/'
+const socialImageUrl = `${siteUrl}profile.jpeg`
 const codexIcon = {
   path: 'M8.086.457a6.105 6.105 0 0 1 3.046-.415c1.333.153 2.521.72 3.564 1.7a.117.117 0 0 0 .107.029c1.408-.346 2.762-.224 4.061.366l.063.03.154.076c1.357.703 2.33 1.77 2.918 3.198.278.679.418 1.388.421 2.126a5.655 5.655 0 0 1-.18 1.631.167.167 0 0 0 .04.155 5.982 5.982 0 0 1 1.578 2.891c.385 1.901-.01 3.615-1.183 5.14l-.182.22a6.063 6.063 0 0 1-2.934 1.851.162.162 0 0 0-.108.102c-.255.736-.511 1.364-.987 1.992-1.199 1.582-2.962 2.462-4.948 2.451-1.583-.008-2.986-.587-4.21-1.736a.145.145 0 0 0-.14-.032c-.518.167-1.04.191-1.604.185a5.924 5.924 0 0 1-2.595-.622 6.058 6.058 0 0 1-2.146-1.781c-.203-.269-.404-.522-.551-.821a7.74 7.74 0 0 1-.495-1.283 6.11 6.11 0 0 1-.017-3.064.166.166 0 0 0 .008-.074.115.115 0 0 0-.037-.064 5.958 5.958 0 0 1-1.38-2.202 5.196 5.196 0 0 1-.333-1.589 6.915 6.915 0 0 1 .188-2.132c.45-1.484 1.309-2.648 2.577-3.493.282-.188.55-.334.802-.438.286-.12.573-.22.861-.304a.129.129 0 0 0 .087-.087A6.016 6.016 0 0 1 5.635 2.31C6.315 1.464 7.132.846 8.086.457zm-.804 7.85a.848.848 0 0 0-1.473.842l1.694 2.965-1.688 2.848a.849.849 0 0 0 1.46.864l1.94-3.272a.849.849 0 0 0 .007-.854l-1.94-3.393zm5.446 6.24a.849.849 0 0 0 0 1.695h4.848a.849.849 0 0 0 0-1.696h-4.848z',
   hex: 'F1ECEC',
@@ -192,7 +195,8 @@ const toolIcons = {
   OpenCode: siOpencode
 }
 const orbeShot = {
-  src: 'https://raw.githubusercontent.com/gabriel-arnon/ORBE/master/docs/evidencias/02-leitura.png'
+  src: publicAsset('orbe-dashboard.png'),
+  altKey: 'orbeAlt'
 }
 const printopsShots = [
   {
@@ -226,7 +230,73 @@ const financyShot = {
   src: publicAsset('financy.png'),
   altKey: 'financyDashboardAlt'
 }
-const featuredProjectCount = 5
+const featuredProjects = [
+  {
+    id: 'orbe',
+    name: 'ORBE',
+    cardClass: 'project-orbe',
+    artClass: 'orbe-art',
+    shots: [orbeShot],
+    statusKey: 'orbeTag',
+    descriptionKey: 'orbe',
+    tech: ['Node.js', 'JavaScript', 'BrasilAPI', 'Open-Meteo', 'Airtable'],
+    links: [{ href: 'https://github.com/gabriel-arnon/ORBE', labelKey: 'orbeRepo' }]
+  },
+  {
+    id: 'printops',
+    name: 'PrintOps',
+    cardClass: 'project-dark',
+    artClass: 'printops-art',
+    shots: printopsShots,
+    imagesKey: 'printopsImages',
+    backdrop: true,
+    statusKey: 'inProgress',
+    descriptionKey: 'printops',
+    tech: ['Python', 'FastAPI', 'React', 'PostgreSQL', 'SNMP'],
+    links: [{ href: 'https://github.com/gabriel-arnon/PrintOps', labelKey: 'printopsRepo' }]
+  },
+  {
+    id: 'nexahelp',
+    name: 'NexaHelp AI',
+    cardClass: 'project-nexa',
+    artClass: 'nexa-art',
+    shots: nexahelpShots,
+    imagesKey: 'nexahelpImages',
+    statusKey: 'nexahelpTag',
+    descriptionKey: 'nexahelp',
+    tech: ['React', 'TypeScript', 'TanStack', 'OpenAI', 'Vitest'],
+    links: [
+      { href: 'https://github.com/gabriel-arnon/nexahelp', label: 'GitHub' },
+      { href: 'https://nexahelp.vercel.app/', labelKey: 'visitSite' }
+    ]
+  },
+  {
+    id: 'almeida',
+    name: 'Almeida Junior Advogado',
+    cardClass: 'project-almeida',
+    artClass: 'almeida-art',
+    shots: [{ src: publicAsset('almeidajunior.png'), altKey: 'almeidaAlt' }],
+    statusKey: 'landingPageTag',
+    descriptionKey: 'landingPage',
+    tech: ['Next.js', 'TypeScript', 'Tailwind', 'Playwright'],
+    links: [
+      { href: 'https://github.com/gabriel-arnon/almeida-junior-advogado', label: 'GitHub' },
+      { href: 'https://www.almeidajunioradvogado.com.br', labelKey: 'visitSite' }
+    ]
+  },
+  {
+    id: 'financy',
+    name: 'Financy',
+    cardClass: 'project-accent',
+    artClass: 'financy-art',
+    shots: [financyShot],
+    statusKey: 'inProgress',
+    descriptionKey: 'financy',
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase'],
+    links: []
+  }
+]
+const featuredProjectCount = featuredProjects.length
 
 function Arrow({ diagonal = false }) {
   return <span className={diagonal ? 'arrow arrow-diagonal' : 'arrow'}>↗</span>
@@ -256,17 +326,54 @@ function ToolIcon({ name }) {
   return <svg className="tool-icon" viewBox="0 0 24 24" aria-hidden="true" style={{ color }}><path d={icon.path} fill="currentColor" fillRule={icon.fillRule} /></svg>
 }
 
+function ProjectCard({ project, index, t }) {
+  const [shotIndex, setShotIndex] = useState(0)
+  const activeShot = project.shots[shotIndex]
+  const hasGallery = project.shots.length > 1
+  const reduceMotion = prefersReducedMotion()
+  const linkLabel = (link) => link.labelKey ? t[link.labelKey] : link.label
+
+  return (
+    <motion.article className={`project-card ${project.cardClass}`} whileHover={reduceMotion ? undefined : { y: -8 }} transition={reduceMotion ? undefined : { duration: 0.25 }}>
+      <div className={`project-art ${project.artClass} screenshot-art`}>
+        {project.backdrop && <img className="project-screenshot-backdrop" src={activeShot.src} alt="" aria-hidden="true" />}
+        {hasGallery ? (
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.img className="project-screenshot" key={activeShot.src} src={activeShot.src} alt={t[activeShot.altKey]} initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.28 }} />
+          </AnimatePresence>
+        ) : (
+          <img className="project-screenshot" src={activeShot.src} alt={t[activeShot.altKey]} />
+        )}
+        <div className="screenshot-shade" />
+        {hasGallery && <div className="shot-controls" aria-label={t[project.imagesKey]}>
+          <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setShotIndex((current) => (current - 1 + project.shots.length) % project.shots.length) }}>←</button>
+          <span>{String(shotIndex + 1).padStart(2, '0')} / {String(project.shots.length).padStart(2, '0')}</span>
+          <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setShotIndex((current) => (current + 1) % project.shots.length) }}>→</button>
+        </div>}
+        <span className="art-index">{String(index + 1).padStart(2, '0')}</span>
+      </div>
+      <div className="project-info"><div><span className="project-tag">{t[project.statusKey]}</span><h3>{project.name}</h3></div><span className="project-arrow">↗</span><p>{t[project.descriptionKey]}</p><div className="project-tech">{project.tech.map((item) => <span key={item}>{item}</span>)}</div>{project.links.length === 1 && <a className="project-repo" href={project.links[0].href} target="_blank" rel="noreferrer">{linkLabel(project.links[0])}<Arrow diagonal /></a>}{project.links.length > 1 && <div className="project-links">{project.links.map((link) => <a className="project-repo" href={link.href} target="_blank" rel="noreferrer" key={link.href}>{linkLabel(link)} <Arrow diagonal /></a>)}</div>}</div>
+    </motion.article>
+  )
+}
+
 function App() {
-  const [language, setLanguage] = useState('pt')
+  const [language, setLanguage] = useState(() => {
+    try {
+      return window.localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'pt'
+    } catch {
+      return 'pt'
+    }
+  })
   const [menuOpen, setMenuOpen] = useState(false)
   const [imageFailed, setImageFailed] = useState(false)
-  const [printopsShotIndex, setPrintopsShotIndex] = useState(0)
-  const [nexahelpShotIndex, setNexahelpShotIndex] = useState(0)
   const heroRef = useRef(null)
   const projectDragRef = useRef({ active: false, axis: null, startX: 0, startY: 0, startScrollLeft: 0, moved: false })
   const t = content[language]
 
   useEffect(() => {
+    if (prefersReducedMotion()) return undefined
+
     const ctx = gsap.context(() => {
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } })
       intro
@@ -306,9 +413,27 @@ function App() {
   }, [])
 
   useEffect(() => {
+    try {
+      window.localStorage.setItem('portfolio-language', language)
+    } catch {
+      // Storage may be unavailable in private browsing contexts.
+    }
+
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
     document.title = t.pageTitle
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.pageDescription)
+    const localizedMeta = {
+      'meta[name="description"]': t.pageDescription,
+      'meta[property="og:title"]': t.pageTitle,
+      'meta[property="og:description"]': t.pageDescription,
+      'meta[property="og:url"]': siteUrl,
+      'meta[property="og:image"]': socialImageUrl,
+      'meta[name="twitter:title"]': t.pageTitle,
+      'meta[name="twitter:description"]': t.pageDescription,
+      'meta[name="twitter:image"]': socialImageUrl
+    }
+    Object.entries(localizedMeta).forEach(([selector, value]) => {
+      document.querySelector(selector)?.setAttribute('content', value)
+    })
   }, [language, t])
 
   const closeMenu = () => setMenuOpen(false)
@@ -359,6 +484,20 @@ function App() {
     event.preventDefault()
     event.stopPropagation()
     projectDragRef.current.moved = false
+  }
+
+  const handleProjectKeyDown = (event) => {
+    if (event.target !== event.currentTarget) return
+
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth'
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+      event.preventDefault()
+      event.currentTarget.scrollBy({ left: event.key === 'ArrowRight' ? event.currentTarget.clientWidth * 0.85 : -event.currentTarget.clientWidth * 0.85, behavior })
+    }
+    if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault()
+      event.currentTarget.scrollTo({ left: event.key === 'Home' ? 0 : event.currentTarget.scrollWidth, behavior })
+    }
   }
 
   return (
@@ -425,58 +564,8 @@ function App() {
           <div className="projects-content">
             <div className="section-heading"><h2>{t.projectsTitle}</h2><p>{t.projectsText}</p></div>
             <div className="project-carousel-meta"><span>{t.dragProjects}</span><span aria-hidden="true">↔</span></div>
-            <div className="project-list" role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick}>
-              <motion.article className="project-card project-orbe" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art orbe-art screenshot-art">
-                  <img className="project-screenshot" src={orbeShot.src} alt={t.orbeAlt} />
-                  <div className="screenshot-shade" />
-                  <span className="art-index">01</span>
-                </div>
-                <div className="project-info"><div><span className="project-tag">{t.orbeTag}</span><h3>ORBE</h3></div><span className="project-arrow">↗</span><p>{t.orbe}</p><div className="project-tech"><span>Node.js</span><span>JavaScript</span><span>BrasilAPI</span><span>Open-Meteo</span><span>Airtable</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/ORBE" target="_blank" rel="noreferrer">{t.orbeRepo}<Arrow diagonal /></a></div>
-              </motion.article>
-              <motion.article className="project-card project-dark" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art printops-art screenshot-art">
-                  <img className="project-screenshot-backdrop" src={printopsShots[printopsShotIndex].src} alt="" aria-hidden="true" />
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className="project-screenshot" key={printopsShots[printopsShotIndex].src} src={printopsShots[printopsShotIndex].src} alt={t[printopsShots[printopsShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
-                  </AnimatePresence>
-                  <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label={t.printopsImages}>
-                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current - 1 + printopsShots.length) % printopsShots.length) }}>←</button>
-                    <span>{String(printopsShotIndex + 1).padStart(2, '0')} / {String(printopsShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setPrintopsShotIndex((current) => (current + 1) % printopsShots.length) }}>→</button>
-                  </div>
-                  <span className="art-index">02</span>
-                </div>
-                <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>PrintOps</h3></div><span className="project-arrow">↗</span><p>{t.printops}</p><div className="project-tech"><span>Python</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>SNMP</span></div><a className="project-repo" href="https://github.com/gabriel-arnon/PrintOps" target="_blank" rel="noreferrer">{t.printopsRepo}<Arrow diagonal /></a></div>
-              </motion.article>
-              <motion.article className="project-card project-nexa" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art nexa-art screenshot-art">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.img className="project-screenshot" key={nexahelpShots[nexahelpShotIndex].src} src={nexahelpShots[nexahelpShotIndex].src} alt={t[nexahelpShots[nexahelpShotIndex].altKey]} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }} />
-                  </AnimatePresence>
-                  <div className="screenshot-shade" />
-                  <div className="shot-controls" aria-label={t.nexahelpImages}>
-                    <button type="button" aria-label={t.previousImage} onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current - 1 + nexahelpShots.length) % nexahelpShots.length) }}>←</button>
-                    <span>{String(nexahelpShotIndex + 1).padStart(2, '0')} / {String(nexahelpShots.length).padStart(2, '0')}</span>
-                    <button type="button" aria-label={t.nextImage} onClick={(event) => { event.stopPropagation(); setNexahelpShotIndex((current) => (current + 1) % nexahelpShots.length) }}>→</button>
-                  </div>
-                  <span className="art-index">03</span>
-                </div>
-                <div className="project-info"><div><span className="project-tag">{t.nexahelpTag}</span><h3>NexaHelp AI</h3></div><span className="project-arrow">↗</span><p>{t.nexahelp}</p><div className="project-tech"><span>React</span><span>TypeScript</span><span>TanStack</span><span>OpenAI</span><span>Vitest</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/nexahelp" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://nexahelp.vercel.app/" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
-              </motion.article>
-              <motion.article className="project-card project-almeida" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art almeida-art screenshot-art"><img className="project-screenshot" src={publicAsset('almeidajunior.png')} alt={t.almeidaAlt} /><div className="screenshot-shade" /><span className="art-index">04</span></div>
-                <div className="project-info"><div><span className="project-tag">{t.landingPageTag}</span><h3>Almeida Junior Advogado</h3></div><span className="project-arrow">↗</span><p>{t.landingPage}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Playwright</span></div><div className="project-links"><a className="project-repo" href="https://github.com/gabriel-arnon/almeida-junior-advogado" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a className="project-repo" href="https://www.almeidajunioradvogado.com.br" target="_blank" rel="noreferrer">{t.visitSite}<Arrow diagonal /></a></div></div>
-              </motion.article>
-              <motion.article className="project-card project-accent" whileHover={{ y: -8 }} transition={{ duration: 0.25 }}>
-                <div className="project-art financy-art screenshot-art">
-                  <img className="project-screenshot" src={financyShot.src} alt={t[financyShot.altKey]} />
-                  <div className="screenshot-shade" />
-                  <span className="art-index">05</span>
-                </div>
-                <div className="project-info"><div><span className="project-tag">{t.inProgress}</span><h3>Financy</h3></div><span className="project-arrow">↗</span><p>{t.financy}</p><div className="project-tech"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Supabase</span></div></div>
-              </motion.article>
+            <div className="project-list" role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick} onKeyDown={handleProjectKeyDown}>
+              {featuredProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} t={t} />)}
             </div>
           </div>
         </section>
