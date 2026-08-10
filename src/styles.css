@@ -99,6 +99,7 @@ h2 { font-size: clamp(36px, 4.4vw, 62px); letter-spacing: -.065em; line-height: 
 .project-list::-webkit-scrollbar-thumb { background: var(--lime); }
 .project-card { display: flex; flex: 0 0 clamp(280px, calc((100% - 32px) / 3), 360px); flex-direction: column; min-width: 0; overflow: hidden; scroll-snap-align: start; }
 .project-dark { background: #1c211c; }
+.project-meucv { background: #101510; }
 .project-orbe { background: #102632; }
 .project-accent { background: #334430; }
 .project-art { aspect-ratio: 1.22; height: auto; position: relative; overflow: hidden; }
@@ -125,6 +126,9 @@ h2 { font-size: clamp(36px, 4.4vw, 62px); letter-spacing: -.065em; line-height: 
 .financy-art .project-screenshot { object-fit: cover; object-position: center; background: #f6f7f2; }
 .financy-art .screenshot-shade { background: linear-gradient(180deg, rgba(17,19,17,.02) 35%, rgba(17,19,17,.3) 100%); }
 .project-nexa { background: #1b202b; }
+.meucv-art { background: radial-gradient(circle at 50% 44%, rgba(214,243,106,.2), transparent 45%), linear-gradient(145deg, #0d1510, #111b13); }
+.meucv-art .project-screenshot { object-fit: cover; padding: 0; filter: none; }
+.meucv-art .screenshot-shade { background: linear-gradient(180deg, rgba(9,19,13,.02) 30%, rgba(9,19,13,.65) 100%); }
 .orbe-art { background: linear-gradient(135deg, #0e2532 0%, #112d35 100%); }
 .orbe-art .project-screenshot { object-position: center top; }
 .orbe-art .screenshot-shade { background: linear-gradient(180deg, rgba(9,19,31,.02) 30%, rgba(9,19,31,.78) 100%); }

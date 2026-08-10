@@ -38,6 +38,10 @@ const content = {
     projectsText: 'Projetos autorais nascidos de problemas concretos e da vontade de entender cada camada de um produto digital.',
     dragProjects: 'Arraste ou use as setas para explorar',
     inProgress: 'Em desenvolvimento',
+    meucv: 'Aplicação que adapta currículos em PDF ou DOCX à descrição de uma vaga com reescrita por IA focada em ATS, preservando os fatos e permitindo revisar cada resultado.',
+    meucvTag: 'Aplicação web',
+    meucvDemo: 'Visitar aplicação',
+    meucvAlt: 'Marca do meuCV, plataforma de adaptação de currículos',
     orbe: 'Central inteligente de monitoramento climático e operacional: consulta um CEP, cruza endereço, geolocalização e previsão meteorológica e classifica níveis de atenção.',
     orbeTag: 'Projeto acadêmico',
     orbeRepo: 'Ver repositório',
@@ -118,6 +122,10 @@ const content = {
     projectsText: 'Independent projects born from concrete problems and the desire to understand every layer of a digital product.',
     dragProjects: 'Drag or use arrow keys to explore',
     inProgress: 'In progress',
+    meucv: 'A web app that adapts PDF or DOCX resumes to job descriptions with ATS-focused AI rewriting, preserving facts and letting candidates review every result.',
+    meucvTag: 'Web application',
+    meucvDemo: 'Visit application',
+    meucvAlt: 'meuCV brand mark, a resume adaptation platform',
     orbe: 'An intelligent climate and operational monitoring hub: it queries a ZIP code, combines address, geolocation and weather data, and classifies attention levels.',
     orbeTag: 'Academic project',
     orbeRepo: 'View repository',
@@ -194,6 +202,10 @@ const toolIcons = {
   Codex: codexIcon,
   OpenCode: siOpencode
 }
+const meucvShot = {
+  src: publicAsset('meucv-brand.png'),
+  altKey: 'meucvAlt'
+}
 const orbeShot = {
   src: publicAsset('orbe-dashboard.png'),
   altKey: 'orbeAlt'
@@ -231,6 +243,17 @@ const financyShot = {
   altKey: 'financyDashboardAlt'
 }
 const featuredProjects = [
+  {
+    id: 'meucv',
+    name: 'meuCV',
+    cardClass: 'project-meucv',
+    artClass: 'meucv-art',
+    shots: [meucvShot],
+    statusKey: 'meucvTag',
+    descriptionKey: 'meucv',
+    tech: ['Next.js', 'OpenAI', 'PostgreSQL', 'NextAuth', 'GSAP'],
+    links: [{ href: 'https://meucv-production.up.railway.app/', labelKey: 'meucvDemo' }]
+  },
   {
     id: 'orbe',
     name: 'ORBE',
