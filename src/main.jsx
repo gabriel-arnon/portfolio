@@ -1,9 +1,12 @@
-import { StrictMode, useEffect, useRef, useState } from 'react'
+import { StrictMode, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AnimatePresence, motion } from 'motion/react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siDocker, siFastapi, siGit, siMongodb, siN8n, siNodedotjs, siNextdotjs, siOpencode, siPostgresql, siPython, siReact, siSupabase, siTypescript } from 'simple-icons'
 import './styles.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const content = {
   pt: {
@@ -24,9 +27,8 @@ const content = {
     previousImage: 'Imagem anterior',
     nextImage: 'Próxima imagem',
     eyebrow: 'Técnico de TI · Desenvolvedor em formação',
-    title: <>Transformo problemas reais<br /><em>em soluções digitais.</em></>,
-    intro: 'Desenvolvedor full stack em formação, interessado em construir produtos úteis, automações inteligentes e sistemas que tornam operações mais simples.',
-    cta: 'Conheça meu trabalho',
+    titleLineOne: 'Transformo problemas reais',
+    titleLineTwo: 'em soluções digitais.',
     availability: 'Disponível para oportunidades',
     scroll: 'Role para explorar',
     aboutLabel: '01 — Sobre mim',
@@ -41,7 +43,7 @@ const content = {
     meucv: 'Aplicação que adapta currículos em PDF ou DOCX à descrição de uma vaga com reescrita por IA focada em ATS, preservando os fatos e permitindo revisar cada resultado.',
     meucvTag: 'Aplicação web',
     meucvDemo: 'Visitar aplicação',
-    meucvAlt: 'Marca do meuCV, plataforma de adaptação de currículos',
+    meucvAlt: 'Página inicial do meuCV com destaque para a adaptação de currículos para ATS',
     orbe: 'Central inteligente de monitoramento climático e operacional: consulta um CEP, cruza endereço, geolocalização e previsão meteorológica e classifica níveis de atenção.',
     orbeTag: 'Projeto acadêmico',
     orbeRepo: 'Ver repositório',
@@ -108,9 +110,8 @@ const content = {
     previousImage: 'Previous image',
     nextImage: 'Next image',
     eyebrow: 'IT Technician · Developer in progress',
-    title: <>I turn real problems<br /><em>into digital solutions.</em></>,
-    intro: 'Full stack developer in progress, interested in building useful products, intelligent automations and systems that make operations simpler.',
-    cta: 'See my work',
+    titleLineOne: 'I turn real problems',
+    titleLineTwo: 'into digital solutions.',
     availability: 'Open to opportunities',
     scroll: 'Scroll to explore',
     aboutLabel: '01 — About me',
@@ -125,7 +126,7 @@ const content = {
     meucv: 'A web app that adapts PDF or DOCX resumes to job descriptions with ATS-focused AI rewriting, preserving facts and letting candidates review every result.',
     meucvTag: 'Web application',
     meucvDemo: 'Visit application',
-    meucvAlt: 'meuCV brand mark, a resume adaptation platform',
+    meucvAlt: 'meuCV homepage highlighting ATS-focused resume adaptation',
     orbe: 'An intelligent climate and operational monitoring hub: it queries a ZIP code, combines address, geolocation and weather data, and classifies attention levels.',
     orbeTag: 'Academic project',
     orbeRepo: 'View repository',
@@ -179,6 +180,11 @@ const content = {
 const stack = ['Python', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'MongoDB', 'Supabase', 'Docker', 'Git', 'n8n', 'Codex', 'OpenCode']
 const publicAsset = (file) => `${import.meta.env.BASE_URL}${file}`
 const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+const scrambleCharacters = '0123456789+-∞'
+const scrambleDuration = 1500
+const scrambleRevealStagger = 1000
+const getScrambledValue = (value) => Array.from(value, () => scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)]).join('')
+const typewriterSpeed = 45
 const siteUrl = 'https://gabriel-arnon.github.io/portfolio/'
 const socialImageUrl = `${siteUrl}profile.jpeg`
 const codexIcon = {
@@ -203,7 +209,7 @@ const toolIcons = {
   OpenCode: siOpencode
 }
 const meucvShot = {
-  src: publicAsset('meucv-brand.png'),
+  src: publicAsset('meucv-home.png'),
   altKey: 'meucvAlt'
 }
 const orbeShot = {
@@ -349,6 +355,108 @@ function ToolIcon({ name }) {
   return <svg className="tool-icon" viewBox="0 0 24 24" aria-hidden="true" style={{ color }}><path d={icon.path} fill="currentColor" fillRule={icon.fillRule} /></svg>
 }
 
+function TypewriterTitle({ firstLine, secondLine, reduceMotion }) {
+  const [visibleFirst, setVisibleFirst] = useState(() => reduceMotion ? firstLine : '')
+  const [visibleSecond, setVisibleSecond] = useState(() => reduceMotion ? secondLine : '')
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setVisibleFirst(firstLine)
+      setVisibleSecond(secondLine)
+      return undefined
+    }
+
+    const firstCharacters = Array.from(firstLine)
+    const secondCharacters = Array.from(secondLine)
+    let firstIndex = 0
+    let secondIndex = 0
+    const timer = window.setInterval(() => {
+      if (firstIndex < firstCharacters.length) {
+        firstIndex += 1
+        setVisibleFirst(firstCharacters.slice(0, firstIndex).join(''))
+        return
+      }
+
+      if (secondIndex < secondCharacters.length) {
+        secondIndex += 1
+        setVisibleSecond(secondCharacters.slice(0, secondIndex).join(''))
+        return
+      }
+
+      window.clearInterval(timer)
+    }, typewriterSpeed)
+
+    return () => window.clearInterval(timer)
+  }, [firstLine, reduceMotion, secondLine])
+
+  const firstLineComplete = visibleFirst === firstLine
+  return (
+    <h1 aria-label={`${firstLine} ${secondLine}`}>
+      <span>{visibleFirst}{!reduceMotion && !firstLineComplete && <span className="typewriter-caret" aria-hidden="true" />}</span>
+      <br />
+      <em>{visibleSecond}{!reduceMotion && firstLineComplete && <span className="typewriter-caret" aria-hidden="true" />}</em>
+    </h1>
+  )
+}
+
+function ScrambleStat({ value, label, index, revealDelay }) {
+  const valueRef = useRef(null)
+  const reduceMotion = prefersReducedMotion()
+  const [initialValue] = useState(() => reduceMotion ? value : getScrambledValue(value))
+
+  useEffect(() => {
+    const element = valueRef.current
+    if (!element) return undefined
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      element.textContent = value
+      return undefined
+    }
+
+    let frameId = 0
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+
+      observer.disconnect()
+      const startedAt = performance.now()
+      const animate = (now) => {
+        const progress = Math.min(Math.max((now - startedAt - revealDelay) / scrambleDuration, 0), 1)
+        const settledCharacters = Math.floor(progress * value.length)
+        element.textContent = Array.from(value, (character, characterIndex) => {
+          if (characterIndex < settledCharacters) return character
+          return scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)]
+        }).join('')
+
+        if (progress < 1) {
+          frameId = requestAnimationFrame(animate)
+        } else {
+          element.textContent = value
+        }
+      }
+
+      frameId = requestAnimationFrame(animate)
+    }, { threshold: 0.65 })
+
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frameId)
+    }
+  }, [reduceMotion, revealDelay, value])
+
+  return (
+    <motion.div
+      className="about-fact"
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.65 }}
+      transition={reduceMotion ? undefined : { duration: 0.55, delay: index * 0.1 }}
+    >
+      <strong ref={valueRef} aria-label={value}>{reduceMotion ? value : initialValue}</strong>
+      <span>{label}</span>
+    </motion.div>
+  )
+}
+
 function ProjectCard({ project, index, t }) {
   const [shotIndex, setShotIndex] = useState(0)
   const activeShot = project.shots[shotIndex]
@@ -391,8 +499,11 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [imageFailed, setImageFailed] = useState(false)
   const heroRef = useRef(null)
+  const projectsSectionRef = useRef(null)
+  const projectsTrackRef = useRef(null)
   const projectDragRef = useRef({ active: false, axis: null, startX: 0, startY: 0, startScrollLeft: 0, moved: false })
   const t = content[language]
+  const reduceMotion = prefersReducedMotion()
 
   useEffect(() => {
     if (prefersReducedMotion()) return undefined
@@ -458,6 +569,40 @@ function App() {
       document.querySelector(selector)?.setAttribute('content', value)
     })
   }, [language, t])
+
+  useLayoutEffect(() => {
+    if (prefersReducedMotion()) return undefined
+
+    const media = gsap.matchMedia()
+    media.add('(min-width: 801px)', () => {
+      const section = projectsSectionRef.current
+      const track = projectsTrackRef.current
+      if (!section || !track) return undefined
+
+      const getHorizontalDistance = () => Math.max(0, track.scrollWidth - track.clientWidth)
+      const tween = gsap.to(track, {
+        scrollLeft: getHorizontalDistance,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${getHorizontalDistance()}`,
+          pin: true,
+          scrub: 1.25,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onToggle: (trigger) => track.classList.toggle('is-scroll-locked', trigger.isActive)
+        }
+      })
+
+      return () => {
+        track.classList.remove('is-scroll-locked')
+        tween.kill()
+      }
+    })
+
+    return () => media.revert()
+  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -547,12 +692,7 @@ function App() {
         <section className="hero section-wrap" id="inicio">
           <div className="hero-copy">
             <div className="eyebrow"><span className="status-dot" />{t.eyebrow}</div>
-            <h1>{t.title}</h1>
-            <p className="hero-intro">{t.intro}</p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#projetos">{t.cta}<Arrow /></a>
-              <a className="text-link" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a>
-            </div>
+            <TypewriterTitle firstLine={t.titleLineOne} secondLine={t.titleLineTwo} reduceMotion={reduceMotion} />
           </div>
           <div className="hero-visual">
             <div className="visual-label label-top">01 / 05</div>
@@ -570,24 +710,31 @@ function App() {
             </div>
             <div className="visual-label label-bottom">{t.availability}</div>
           </div>
-          <div className="hero-meta"><span className="scroll-mark">↓</span><span>{t.scroll}</span><span className="meta-line" /></div>
+          <div className="hero-meta"><span className="scroll-mark" aria-hidden="true">↓</span><span>{t.scroll}</span></div>
         </section>
 
-        <section className="about section-wrap section-grid" id="sobre">
+        <motion.section
+          className="about section-wrap section-grid"
+          id="sobre"
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={reduceMotion ? undefined : { duration: 1, ease: 'power3.out' }}
+        >
           <div className="section-kicker"><span>{t.aboutLabel}</span><span className="kicker-line" /></div>
           <div className="about-content">
             <h2>{t.aboutTitle}</h2>
             <div className="about-columns"><p>{t.aboutText}</p><p>{t.aboutTextTwo}</p></div>
-            <div className="about-facts"><div><strong>{String(featuredProjectCount).padStart(2, '0')}</strong><span>{t.factProjects}</span></div><div><strong>03+</strong><span>{t.factYears}</span></div><div><strong>∞</strong><span>{t.factLearning}</span></div></div>
+            <div className="about-facts"><ScrambleStat value={String(featuredProjectCount).padStart(2, '0')} label={t.factProjects} index={0} revealDelay={0} /><ScrambleStat value="03+" label={t.factYears} index={1} revealDelay={scrambleRevealStagger} /><ScrambleStat value="∞" label={t.factLearning} index={2} revealDelay={scrambleRevealStagger * 2} /></div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="projects section-wrap section-grid" id="projetos">
+        <section className="projects section-wrap section-grid" id="projetos" ref={projectsSectionRef}>
           <div className="section-kicker"><span>{t.projectsLabel}</span><span className="kicker-line" /></div>
           <div className="projects-content">
             <div className="section-heading"><h2>{t.projectsTitle}</h2><p>{t.projectsText}</p></div>
             <div className="project-carousel-meta"><span>{t.dragProjects}</span><span aria-hidden="true">↔</span></div>
-            <div className="project-list" role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick} onKeyDown={handleProjectKeyDown}>
+            <div className="project-list" ref={projectsTrackRef} role="region" aria-label={t.projectsLabel} tabIndex={0} onPointerDown={startProjectDrag} onPointerMove={moveProjectDrag} onPointerUp={endProjectDrag} onPointerCancel={endProjectDrag} onClickCapture={preventDraggedProjectClick} onKeyDown={handleProjectKeyDown}>
               {featuredProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} t={t} />)}
             </div>
           </div>
@@ -598,10 +745,33 @@ function App() {
           <div className="stack-content"><h2>{t.stackTitle}</h2><p>{t.stackText}</p><div className="stack-cloud">{stack.map((item, index) => <motion.span key={item} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.035 }}><ToolIcon name={item} /><span>{item}</span></motion.span>)}</div></div>
         </section>
 
-        <section className="experience section-wrap section-grid" id="experiencia">
+        <motion.section
+          className="experience section-wrap section-grid"
+          id="experiencia"
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={reduceMotion ? undefined : { duration: 1, ease: 'power3.out' }}
+        >
           <div className="section-kicker"><span>{t.experienceLabel}</span><span className="kicker-line" /></div>
-          <div className="experience-content"><h2>{t.experienceTitle}</h2><div className="timeline"><div className="timeline-item"><div className="timeline-date">10.2024 — <span>{t.current}</span></div><div><h3>{t.itRole}</h3><p>{t.intsCompany}</p><small>{t.hospital}</small></div></div><div className="timeline-item"><div className="timeline-date">09.2023 — 08.2024</div><div><h3>{t.customerRole}</h3><p>{t.linkfortCompany}</p><small>{t.location}</small></div></div><div className="timeline-item"><div className="timeline-date">08.2025 — 03.2027</div><div><h3>{t.degree}</h3><p>UniFECAF</p><small>{t.degreeStatus}</small></div></div></div></div>
-        </section>
+          <div className="experience-content">
+            <h2>{t.experienceTitle}</h2>
+            <div className="timeline">
+              <motion.div className="timeline-item" initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={reduceMotion ? undefined : { duration: 0.7, delay: 0.15 }}>
+                <div className="timeline-date">10.2024 — <span>{t.current}</span></div>
+                <div><h3>{t.itRole}</h3><p>{t.intsCompany}</p><small>{t.hospital}</small></div>
+              </motion.div>
+              <motion.div className="timeline-item" initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={reduceMotion ? undefined : { duration: 0.7, delay: 0.25 }}>
+                <div className="timeline-date">09.2023 — 08.2024</div>
+                <div><h3>{t.customerRole}</h3><p>{t.linkfortCompany}</p><small>{t.location}</small></div>
+              </motion.div>
+              <motion.div className="timeline-item" initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={reduceMotion ? undefined : { duration: 0.7, delay: 0.35 }}>
+                <div className="timeline-date">08.2025 — 03.2027</div>
+                <div><h3>{t.degree}</h3><p>UniFECAF</p><small>{t.degreeStatus}</small></div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
 
         <section className="contact section-wrap" id="contato"><div className="contact-inner"><div className="section-kicker"><span>{t.contactLabel}</span><span className="kicker-line" /></div><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className="button button-light" href="mailto:gabriel.drtroll@gmail.com">{t.email}<Arrow diagonal /></a><div className="contact-links"><a href="https://github.com/gabriel-arnon" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a><a href="https://www.linkedin.com/in/gabriel-arnon" target="_blank" rel="noreferrer">LinkedIn <Arrow diagonal /></a><a href={publicAsset('curriculo.pdf')} target="_blank" rel="noreferrer">{t.resumeLink} · {t.resume}<Arrow diagonal /></a></div></div></section>
       </main>
