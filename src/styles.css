@@ -43,6 +43,10 @@ button { cursor: pointer; border: 0; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(54px, 7.2vw, 106px); line-height: .96; letter-spacing: -.075em; font-weight: 500; margin: 27px 0 32px; max-width: 760px; }
 .typewriter-caret { display: inline-block; width: .06em; height: .82em; margin-left: .08em; background: var(--lime); vertical-align: -.08em; animation: typewriter-caret .8s step-end infinite; }
+.typewriter-line { display: grid; }
+.typewriter-line > * { grid-area: 1 / 1; min-width: 0; }
+.typewriter-line-measure { visibility: hidden; pointer-events: none; }
+.typewriter-line-visible { display: block; }
 @keyframes typewriter-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 .button { display: inline-flex; align-items: center; gap: 24px; padding: 15px 18px; font-family: var(--mono); text-transform: uppercase; letter-spacing: .04em; font-size: 10px; transition: transform .25s, background .25s; }
 .button:hover { transform: translateY(-3px); }

@@ -28,7 +28,16 @@ const content = {
     nextImage: 'Próxima imagem',
     eyebrow: 'Técnico de TI · Desenvolvedor em formação',
     titleLineOne: 'Transformo problemas reais',
-    titleLineTwo: 'em soluções digitais.',
+    titleLineTwoOptions: [
+      'em soluções digitais.',
+      'em sistemas eficientes.',
+      'em experiências inteligentes.',
+      'em tecnologia que funciona.',
+      'em ferramentas que conectam.',
+      'em resultados concretos.',
+      'em ideias aplicáveis.',
+      'em soluções com impacto.'
+    ],
     availability: 'Disponível para oportunidades',
     scroll: 'Role para explorar',
     aboutLabel: '01 — Sobre mim',
@@ -111,7 +120,16 @@ const content = {
     nextImage: 'Next image',
     eyebrow: 'IT Technician · Developer in progress',
     titleLineOne: 'I turn real problems',
-    titleLineTwo: 'into digital solutions.',
+    titleLineTwoOptions: [
+      'into digital solutions.',
+      'into efficient systems.',
+      'into intelligent experiences.',
+      'into technology that works.',
+      'into tools that connect.',
+      'into concrete results.',
+      'into ideas you can use.',
+      'into impactful solutions.'
+    ],
     availability: 'Open to opportunities',
     scroll: 'Scroll to explore',
     aboutLabel: '01 — About me',
@@ -185,6 +203,16 @@ const scrambleDuration = 1500
 const scrambleRevealStagger = 1000
 const getScrambledValue = (value) => Array.from(value, () => scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)]).join('')
 const typewriterSpeed = 45
+const typewriterEraseSpeed = 30
+const typewriterPhraseHold = 2500
+const typewriterPhrasePause = 180
+const randomPhraseIndex = (currentIndex, total) => {
+  if (total < 2) return currentIndex
+
+  let nextIndex = currentIndex
+  while (nextIndex === currentIndex) nextIndex = Math.floor(Math.random() * total)
+  return nextIndex
+}
 const siteUrl = 'https://gabriel-arnon.github.io/portfolio/'
 const socialImageUrl = `${siteUrl}profile.jpeg`
 const codexIcon = {
@@ -355,46 +383,100 @@ function ToolIcon({ name }) {
   return <svg className="tool-icon" viewBox="0 0 24 24" aria-hidden="true" style={{ color }}><path d={icon.path} fill="currentColor" fillRule={icon.fillRule} /></svg>
 }
 
-function TypewriterTitle({ firstLine, secondLine, reduceMotion }) {
+function TypewriterTitle({ firstLine, secondLines, reduceMotion }) {
+  const initialSecond = secondLines[0] ?? ''
+  const longestSecond = secondLines.reduce((longest, line) => line.length > longest.length ? line : longest, initialSecond)
   const [visibleFirst, setVisibleFirst] = useState(() => reduceMotion ? firstLine : '')
-  const [visibleSecond, setVisibleSecond] = useState(() => reduceMotion ? secondLine : '')
+  const [visibleSecond, setVisibleSecond] = useState(() => reduceMotion ? initialSecond : '')
 
   useEffect(() => {
     if (reduceMotion) {
       setVisibleFirst(firstLine)
-      setVisibleSecond(secondLine)
+      setVisibleSecond(initialSecond)
       return undefined
     }
 
     const firstCharacters = Array.from(firstLine)
-    const secondCharacters = Array.from(secondLine)
     let firstIndex = 0
-    let secondIndex = 0
-    const timer = window.setInterval(() => {
-      if (firstIndex < firstCharacters.length) {
+    let phraseIndex = 0
+    let characterIndex = 0
+    let phase = 'typing-first'
+    let timerId = 0
+    let stopped = false
+
+    const schedule = (delay) => {
+      timerId = window.setTimeout(advance, delay)
+    }
+
+    const advance = () => {
+      if (stopped) return
+
+      if (phase === 'typing-first' && firstIndex < firstCharacters.length) {
         firstIndex += 1
         setVisibleFirst(firstCharacters.slice(0, firstIndex).join(''))
+        schedule(typewriterSpeed)
         return
       }
 
-      if (secondIndex < secondCharacters.length) {
-        secondIndex += 1
-        setVisibleSecond(secondCharacters.slice(0, secondIndex).join(''))
+      if (phase === 'typing-first') phase = 'typing-phrase'
+
+      const phraseCharacters = Array.from(secondLines[phraseIndex] ?? '')
+      if (phase === 'typing-phrase' && characterIndex < phraseCharacters.length) {
+        characterIndex += 1
+        setVisibleSecond(phraseCharacters.slice(0, characterIndex).join(''))
+        schedule(typewriterSpeed)
         return
       }
 
-      window.clearInterval(timer)
-    }, typewriterSpeed)
+      if (phase === 'typing-phrase') {
+        phase = 'holding'
+        schedule(typewriterPhraseHold)
+        return
+      }
 
-    return () => window.clearInterval(timer)
-  }, [firstLine, reduceMotion, secondLine])
+      if (phase === 'holding') {
+        phase = 'erasing'
+        characterIndex = phraseCharacters.length
+      }
+
+      if (phase === 'erasing' && characterIndex > 0) {
+        characterIndex -= 1
+        setVisibleSecond(phraseCharacters.slice(0, characterIndex).join(''))
+        schedule(typewriterEraseSpeed)
+        return
+      }
+
+      if (phase === 'erasing') {
+        phraseIndex = randomPhraseIndex(phraseIndex, secondLines.length)
+        characterIndex = 0
+        phase = 'pause'
+        schedule(typewriterPhrasePause)
+        return
+      }
+
+      phase = 'typing-phrase'
+      schedule(typewriterSpeed)
+    }
+
+    setVisibleFirst('')
+    setVisibleSecond('')
+    schedule(typewriterSpeed)
+
+    return () => {
+      stopped = true
+      window.clearTimeout(timerId)
+    }
+  }, [firstLine, initialSecond, reduceMotion, secondLines])
 
   const firstLineComplete = visibleFirst === firstLine
   return (
-    <h1 aria-label={`${firstLine} ${secondLine}`}>
+    <h1 aria-label={`${firstLine} ${initialSecond}`}>
       <span>{visibleFirst}{!reduceMotion && !firstLineComplete && <span className="typewriter-caret" aria-hidden="true" />}</span>
       <br />
-      <em>{visibleSecond}{!reduceMotion && firstLineComplete && <span className="typewriter-caret" aria-hidden="true" />}</em>
+      <span className="typewriter-line">
+        <span className="typewriter-line-measure" aria-hidden="true">{longestSecond}</span>
+        <em className="typewriter-line-visible">{visibleSecond}{!reduceMotion && firstLineComplete && <span className="typewriter-caret" aria-hidden="true" />}</em>
+      </span>
     </h1>
   )
 }
@@ -692,7 +774,7 @@ function App() {
         <section className="hero section-wrap" id="inicio">
           <div className="hero-copy">
             <div className="eyebrow"><span className="status-dot" />{t.eyebrow}</div>
-            <TypewriterTitle firstLine={t.titleLineOne} secondLine={t.titleLineTwo} reduceMotion={reduceMotion} />
+            <TypewriterTitle firstLine={t.titleLineOne} secondLines={t.titleLineTwoOptions} reduceMotion={reduceMotion} />
           </div>
           <div className="hero-visual">
             <div className="visual-label label-top">01 / 05</div>
