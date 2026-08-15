@@ -43,7 +43,7 @@ button { cursor: pointer; border: 0; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(54px, 7.2vw, 106px); line-height: .96; letter-spacing: -.075em; font-weight: 500; margin: 27px 0 32px; max-width: 760px; }
 .typewriter-caret { display: inline-block; width: .06em; height: .82em; margin-left: .08em; background: var(--lime); vertical-align: -.08em; animation: typewriter-caret .8s step-end infinite; }
-.typewriter-line { display: grid; }
+.typewriter-line { display: grid; font-size: clamp(40px, 7vw, 94px); }
 .typewriter-line > * { grid-area: 1 / 1; min-width: 0; }
 .typewriter-line-measure { visibility: hidden; pointer-events: none; }
 .typewriter-line-visible { display: block; }
